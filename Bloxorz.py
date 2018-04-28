@@ -1,5 +1,6 @@
 # import numpy as np
 import queue
+import copy
 
 ########################################################################################################################
 # Map description:
@@ -62,6 +63,18 @@ LEVEL6_ARRAY = [
     [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0]
 ]
+LEVEL7_ARRAY = [
+    [0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 4, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0],
+    [1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1],
+    [0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1],
+    [0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1],
+    [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1],
+    [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0]
+]
 
 
 ########################################################################################################################
@@ -82,6 +95,8 @@ class Node:
         self.action = action
         self.map = map
 
+    def is_stand(self):
+        return self.data[0] == self.data[2] and self.data[1] == self.data[3]
 
 
 ########################################################################################################################
@@ -94,7 +109,7 @@ class State:
         self.board = board.copy()
         self.states = [start]
         self.xo_objects = xo_objects
-        self.visited = [start]
+        #self.visited = [start]
 
     # self.all_moves = self.next_position()
 
@@ -103,21 +118,22 @@ class State:
     ####################################################################################################################
     def next_position(self, prev_node):
         rv = []
+        saved_map = copy.deepcopy(prev_node.map)
         if self.is_stand():
-            rv.append(Node((self.x0, self.y0 + 1, self.x1, self.y1 + 2), prev_node, "down", prev_node.map))
-            rv.append(Node((self.x0, self.y0 - 1, self.x0, self.y0 - 2), prev_node, "up", prev_node.map))
-            rv.append(Node((self.x0 + 1, self.y0, self.x0 + 2, self.y0), prev_node, "right", prev_node.map))
-            rv.append(Node((self.x0 - 1, self.y0, self.x0 - 2, self.y1), prev_node, "left", prev_node.map))
+            rv.append(Node((self.x0, self.y0+1, self.x1, self.y1+2), prev_node, "down", saved_map))
+            rv.append(Node((self.x0, self.y0 - 1, self.x0, self.y0 - 2), prev_node, "up", saved_map))
+            rv.append(Node((self.x0 + 1, self.y0, self.x0 + 2, self.y0), prev_node, "right", saved_map))
+            rv.append(Node((self.x0 - 1, self.y0, self.x0 - 2, self.y1), prev_node, "left", saved_map))
         elif self.x0 == self.x1:
-            rv.append(Node((self.x0 + 1, self.y0, self.x1 + 1, self.y1), prev_node, "right", prev_node.map))
-            rv.append(Node((self.x0 - 1, self.y0, self.x1 - 1, self.y1), prev_node, "left", prev_node.map))
-            rv.append(Node((self.x0, self.y0 - 1, self.x1, self.y1 - 2), prev_node, "up", prev_node.map))
-            rv.append(Node((self.x0, self.y0 + 2, self.x1, self.y1 + 1), prev_node, "down", prev_node.map))
+            rv.append(Node((self.x0 + 1, self.y0, self.x1 + 1, self.y1), prev_node, "right", saved_map))
+            rv.append(Node((self.x0 - 1, self.y0, self.x1 - 1, self.y1), prev_node, "left", saved_map))
+            rv.append(Node((self.x0, self.y0 - 1, self.x1, self.y1 - 2), prev_node, "up", saved_map))
+            rv.append(Node((self.x0, self.y0 + 2, self.x1, self.y1 + 1), prev_node, "down", saved_map))
         elif self.y0 == self.y1:
-            rv.append(Node((self.x0, self.y0 + 1, self.x1, self.y1 + 1), prev_node, "down", prev_node.map))
-            rv.append(Node((self.x0, self.y0 - 1, self.x1, self.y1 - 1), prev_node, "up", prev_node.map))
-            rv.append(Node((self.x0 - 1, self.y0, self.x1 - 2, self.y1), prev_node, "left", prev_node.map))
-            rv.append(Node((self.x0 + 2, self.y0, self.x1 + 1, self.y1), prev_node, "right", prev_node.map))
+            rv.append(Node((self.x0, self.y0 + 1, self.x1, self.y1 + 1), prev_node, "down", saved_map))
+            rv.append(Node((self.x0, self.y0 - 1, self.x1, self.y1 - 1), prev_node, "up",saved_map))
+            rv.append(Node((self.x0 - 1, self.y0, self.x1 - 2, self.y1), prev_node, "left", saved_map))
+            rv.append(Node((self.x0 + 2, self.y0, self.x1 + 1, self.y1), prev_node, "right", saved_map))
         else:
             return []
         return rv
@@ -139,15 +155,21 @@ class State:
     # Created: SonPhan 23/04/2018
     ####################################################################################################################
     def notContain(self, node):
-        for n in self.visited:
-            if (node.data[0] == n.data[0] and node.data[1] == n.data[1] and node.data[2] == n.data[2] and node.data[3] == \
-                    n.data[3]):
+        prev = node.prev_node
+        while prev:
+            if node.data[0] == prev.data[0] and node.data[1] == prev.data[1] and node.data[2] == prev.data[2] \
+                    and node.data[3] == prev.data[3]:
                 return False
+            prev = prev.prev_node
+        # for n in self.visited:
+        #     if (node.data[0] == n.data[0] and node.data[1] == n.data[1] and node.data[2] == n.data[2] and node.data[3] == \
+        #             n.data[3]):
+        #         return False
         return True
 
     def add_state(self, node):
         if self.notContain(node):
-            self.visited.append(node)
+            #self.visited.append(node)
             self.states.append(node)
             return True
         return False
@@ -173,41 +195,33 @@ class State:
     def set_player_position(self, node):
         self.x0, self.y0, self.x1, self.y1 = node.data
         for xo_object in self.xo_objects:
-            if xo_object.type == -1:  # Only enable
-                # if node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] == 0:  # disable
-                    # self.visited = [node]
-                node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] = 1
-                node.map[xo_object.managed_position[3]][xo_object.managed_position[2]] = 1
-            if xo_object.type == -2:  # Only disable
-                # if node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] == 1:  # enable
-                    # self.visited = [node]
-                node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] = 0
-                node.map[xo_object.managed_position[3]][xo_object.managed_position[2]] = 0
-            if xo_object.type == -3:  # Only disable
-                # self.visited = [node]
-                node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] = abs(
-                    node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] - 1)
-                node.map[xo_object.managed_position[3]][xo_object.managed_position[2]] = abs(
-                    node.map[xo_object.managed_position[3]][xo_object.managed_position[2]] - 1)
-            if xo_object.type == 1:  # Only enable
-                if self.is_stand:
-                    # if node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] == 0:  # disable
-                        # self.visited = [node]
-                    node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] = 1
-                    node.map[xo_object.managed_position[3]][xo_object.managed_position[2]] = 1
-            if xo_object.type == 2:  # Only disable
-                if self.is_stand:
-                    # if node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] == 1:  # enable
-                        # self.visited = [node]
-                    node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] = 0
-                    node.map[xo_object.managed_position[3]][xo_object.managed_position[2]] = 0
-            if xo_object.type == 3:  # Only disable
-                if self.is_stand:
-                    # self.visited = [node]
+            if (self.x0 == xo_object.position[0] and self.y0 == xo_object.position[1]) or (self.x1 == xo_object.position[0] and self.y1 == xo_object.position[1]):
+                if xo_object.type == -3:  # Only disable
                     node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] = abs(
                         node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] - 1)
                     node.map[xo_object.managed_position[3]][xo_object.managed_position[2]] = abs(
                         node.map[xo_object.managed_position[3]][xo_object.managed_position[2]] - 1)
+                elif xo_object.type == 3:  # Only disable
+                    if self.is_stand():
+                        node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] = abs(
+                            node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] - 1)
+                        node.map[xo_object.managed_position[3]][xo_object.managed_position[2]] = abs(
+                            node.map[xo_object.managed_position[3]][xo_object.managed_position[2]] - 1)
+                elif xo_object.type == -1:  # Only enable
+                    node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] = 1
+                    node.map[xo_object.managed_position[3]][xo_object.managed_position[2]] = 1
+                elif xo_object.type == -2:  # Only disable
+                    node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] = 0
+                    node.map[xo_object.managed_position[3]][xo_object.managed_position[2]] = 0
+                elif xo_object.type == 1:  # Only enable
+                    if self.is_stand():
+                        node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] = 1
+                        node.map[xo_object.managed_position[3]][xo_object.managed_position[2]] = 1
+                elif xo_object.type == 2:  # Only disable
+                    if self.is_stand():
+                        node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] = 0
+                        node.map[xo_object.managed_position[3]][xo_object.managed_position[2]] = 0
+
 
 
 class XOObject:
@@ -224,7 +238,10 @@ def bfs(state):
     current_state = Node
     # BFS operation
     while len(state.states) != 0:
+        #if state.x0 == 2 and state.y0 == 2:
+        #     print("a")
         current_state = state.states.pop(0)
+       # print(current_state.data)
         state.set_player_position(current_state)
         if state.check_goal():
             break
@@ -242,7 +259,7 @@ def bfs(state):
 
 def main(level=LEVEL2_ARRAY):
     xo_objects = [XOObject(-3, (2, 2), (4, 4, 5, 4)), XOObject(3, (8, 1), (10, 4, 11, 4))]
-    state = State(Node((1, 3, 1, 3), None, "", level),level,xo_objects)
+    state = State(Node((1, 4, 1, 4), None, "", level),level,xo_objects)
     # state = State(Node((1, 3, 1, 3), None, "", level), level)
     bfs(state)
 
