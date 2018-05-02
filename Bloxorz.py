@@ -184,19 +184,19 @@ class State:
     ####################################################################################################################
     # Function to check valid move
     ####################################################################################################################
-    @staticmethod
-    def is_valid(node):
-        height = len(node.prev_node.map)
-        width = len(node.prev_node.map[0])
+    #@staticmethod
+    def is_valid(self, node):
+        height = len(self.board)
+        width = len(self.board[0])
         if node.data[0] < 0 or node.data[0] >= width or node.data[1] < 0 or node.data[1] >= height \
                 or node.data[2] < 0 or node.data[2] >= width or node.data[3] < 0 or node.data[3] >= height:
             return False
-        if node.prev_node.map[node.data[1]][node.data[0]] == 0 or node.prev_node.map[node.data[3]][
+        if node.map[node.data[1]][node.data[0]] == 0 or node.map[node.data[3]][
             node.data[2]] == 0:
             return False
-        if node.data[0] == node.data[2] and node.data[1] == node.data[3] and node.prev_node.map[node.data[1]][
+        if node.data[0] == node.data[2] and node.data[1] == node.data[3] and node.map[node.data[1]][
             node.data[0]] == 5 \
-                and node.prev_node.map[node.data[3]][node.data[2]] == 5:
+                and node.map[node.data[3]][node.data[2]] == 5:
             return False
         return True
 
