@@ -1,6 +1,3 @@
-# import numpy as np
-import queue
-import copy
 
 ########################################################################################################################
 # Map description:
@@ -78,6 +75,13 @@ LEVEL7_ARRAY = [
 
 
 ########################################################################################################################
+# Function map_copy. (Because python's deepcopy is extremely slow so I implement my own deepcopy)
+########################################################################################################################
+def map_copy(map):
+    return [list(x) for x in map]
+
+
+########################################################################################################################
 # Data structure to store object's place, as well as its previous place and the action (up, down, left, right) to achieve it
 # data: tuple (place)
 # prev: Node (previous place)
@@ -93,7 +97,7 @@ class Node:
             self.data = data
         self.prev_node = prev_node
         self.action = action
-        self.map = map
+        self.map = map_copy(map)
 
     def is_stand(self):
         return self.data[0] == self.data[2] and self.data[1] == self.data[3]
@@ -106,7 +110,7 @@ class State:
         if xo_objects is None:
             xo_objects = []
         self.x0, self.y0, self.x1, self.y1 = start.data
-        self.board = board.copy()
+        self.board = map_copy(board)
         self.states = [start]
         self.xo_objects = xo_objects
         #self.visited = [start]
@@ -118,37 +122,26 @@ class State:
     ####################################################################################################################
     def next_position(self, prev_node):
         rv = []
-        saved_map = copy.deepcopy(prev_node.map)
         if self.is_stand():
-            rv.append(Node((self.x0, self.y0+1, self.x1, self.y1+2), prev_node, "down", saved_map))
-            rv.append(Node((self.x0, self.y0 - 1, self.x0, self.y0 - 2), prev_node, "up", saved_map))
-            rv.append(Node((self.x0 + 1, self.y0, self.x0 + 2, self.y0), prev_node, "right", saved_map))
-            rv.append(Node((self.x0 - 1, self.y0, self.x0 - 2, self.y1), prev_node, "left", saved_map))
+            rv.append(Node((self.x0, self.y0+1, self.x1, self.y1+2), prev_node, "down", prev_node.map))
+            rv.append(Node((self.x0, self.y0 - 1, self.x0, self.y0 - 2), prev_node, "up", prev_node.map))
+            rv.append(Node((self.x0 + 1, self.y0, self.x0 + 2, self.y0), prev_node, "right", prev_node.map))
+            rv.append(Node((self.x0 - 1, self.y0, self.x0 - 2, self.y1), prev_node, "left", prev_node.map))
         elif self.x0 == self.x1:
-            rv.append(Node((self.x0 + 1, self.y0, self.x1 + 1, self.y1), prev_node, "right", saved_map))
-            rv.append(Node((self.x0 - 1, self.y0, self.x1 - 1, self.y1), prev_node, "left", saved_map))
-            rv.append(Node((self.x0, self.y0 - 1, self.x1, self.y1 - 2), prev_node, "up", saved_map))
-            rv.append(Node((self.x0, self.y0 + 2, self.x1, self.y1 + 1), prev_node, "down", saved_map))
+            rv.append(Node((self.x0 + 1, self.y0, self.x1 + 1, self.y1), prev_node, "right", prev_node.map))
+            rv.append(Node((self.x0 - 1, self.y0, self.x1 - 1, self.y1), prev_node, "left", prev_node.map))
+            rv.append(Node((self.x0, self.y0 - 1, self.x1, self.y1 - 2), prev_node, "up", prev_node.map))
+            rv.append(Node((self.x0, self.y0 + 2, self.x1, self.y1 + 1), prev_node, "down", prev_node.map))
         elif self.y0 == self.y1:
-            rv.append(Node((self.x0, self.y0 + 1, self.x1, self.y1 + 1), prev_node, "down", saved_map))
-            rv.append(Node((self.x0, self.y0 - 1, self.x1, self.y1 - 1), prev_node, "up",saved_map))
-            rv.append(Node((self.x0 - 1, self.y0, self.x1 - 2, self.y1), prev_node, "left", saved_map))
-            rv.append(Node((self.x0 + 2, self.y0, self.x1 + 1, self.y1), prev_node, "right", saved_map))
+            rv.append(Node((self.x0, self.y0 + 1, self.x1, self.y1 + 1), prev_node, "down", prev_node.map))
+            rv.append(Node((self.x0, self.y0 - 1, self.x1, self.y1 - 1), prev_node, "up",prev_node.map))
+            rv.append(Node((self.x0 - 1, self.y0, self.x1 - 2, self.y1), prev_node, "left", prev_node.map))
+            rv.append(Node((self.x0 + 2, self.y0, self.x1 + 1, self.y1), prev_node, "right", prev_node.map))
         else:
             return []
         return rv
 
-    ####################################################################################################################
-    # Function to check valid move
-    ####################################################################################################################
-    @staticmethod
-    def is_valid(node):
-        height = len(node.prev_node.map)
-        width = len(node.prev_node.map[0])
-        if node.data[0] < 0 or node.data[0] >= width or node.data[1] < 0 or node.data[1] >= height \
-                or node.data[2] < 0 or node.data[2] >= width or node.data[3] < 0 or node.data[3] >= height:
-            return False
-        return node.prev_node.map[node.data[1]][node.data[0]] != 0 and node.prev_node.map[node.data[3]][node.data[2]] != 0
+
 
     ####################################################################################################################
     # Function to check if the object repeated previous move (which could lead to infinite loop)
@@ -166,6 +159,19 @@ class State:
         #             n.data[3]):
         #         return False
         return True
+
+    ####################################################################################################################
+    # Function to check valid move
+    ####################################################################################################################
+    @staticmethod
+    def is_valid(node):
+        height = len(node.prev_node.map)
+        width = len(node.prev_node.map[0])
+        if node.data[0] < 0 or node.data[0] >= width or node.data[1] < 0 or node.data[1] >= height \
+                or node.data[2] < 0 or node.data[2] >= width or node.data[3] < 0 or node.data[3] >= height:
+            return False
+        return node.prev_node.map[node.data[1]][node.data[0]] != 0 and node.prev_node.map[node.data[3]][
+            node.data[2]] != 0
 
     def add_state(self, node):
         if self.notContain(node):
@@ -196,12 +202,12 @@ class State:
         self.x0, self.y0, self.x1, self.y1 = node.data
         for xo_object in self.xo_objects:
             if (self.x0 == xo_object.position[0] and self.y0 == xo_object.position[1]) or (self.x1 == xo_object.position[0] and self.y1 == xo_object.position[1]):
-                if xo_object.type == -3:  # Only disable
+                if xo_object.type == -3:
                     node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] = abs(
                         node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] - 1)
                     node.map[xo_object.managed_position[3]][xo_object.managed_position[2]] = abs(
                         node.map[xo_object.managed_position[3]][xo_object.managed_position[2]] - 1)
-                elif xo_object.type == 3:  # Only disable
+                elif xo_object.type == 3:
                     if self.is_stand():
                         node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] = abs(
                             node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] - 1)
@@ -238,10 +244,7 @@ def bfs(state):
     current_state = Node
     # BFS operation
     while len(state.states) != 0:
-        #if state.x0 == 2 and state.y0 == 2:
-        #     print("a")
         current_state = state.states.pop(0)
-       # print(current_state.data)
         state.set_player_position(current_state)
         if state.check_goal():
             break
@@ -258,9 +261,22 @@ def bfs(state):
 
 
 def main(level=LEVEL2_ARRAY):
+    # LEVEL1 SOLVER:
+    # state = State(Node((1, 1, 1, 1), None, "", LEVEL1_ARRAY), LEVEL1_ARRAY)
+
+    # LEVEL2 SOLVER:
     xo_objects = [XOObject(-3, (2, 2), (4, 4, 5, 4)), XOObject(3, (8, 1), (10, 4, 11, 4))]
-    state = State(Node((1, 4, 1, 4), None, "", level),level,xo_objects)
-    # state = State(Node((1, 3, 1, 3), None, "", level), level)
+    state = State(Node((1, 4, 1, 4), None, "", LEVEL2_ARRAY),level, xo_objects)
+
+    # LEVEL3 SOLVER:
+    # state = State(Node((1, 3, 1, 3), None, "", LEVEL3_ARRAY), LEVEL3_ARRAY)
+
+
+
+    # LEVEL6 SOLVER:
+    # state = State(Node((0, 3, 0, 3), None, "", LEVEL6_ARRAY), LEVEL6_ARRAY)
+
+
     bfs(state)
 
 
