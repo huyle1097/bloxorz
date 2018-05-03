@@ -191,7 +191,8 @@ class State:
                     rv.append(Node(data, prev_node, direction, prev_node.map, xo_objects_states))
                     return
                 elif xo_object.type == 3:
-                    if self.is_stand():
+                    # if self.is_stand():
+                    if data[0] == data[2] and data[1] == data[3]:  # stand
                         xo_objects_states = list(prev_node.xo_objects_states)
                         xo_objects_states[self.xo_objects.index(xo_object)] = not xo_objects_states[
                             self.xo_objects.index(xo_object)]
@@ -214,7 +215,8 @@ class State:
                         rv.append(Node(data, prev_node, direction, prev_node.map, xo_objects_states))
                         return
                 elif xo_object.type == 1:  # Only enable
-                    if self.is_stand():
+                    # if self.is_stand():
+                    if data[0] == data[2] and data[1] == data[3]:  # stand
                         if prev_node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] == 0 and \
                                 prev_node.map[xo_object.managed_position[3]][xo_object.managed_position[2]] == 0:
                             xo_objects_states = list(prev_node.xo_objects_states)
@@ -223,7 +225,8 @@ class State:
                             rv.append(Node(data, prev_node, direction, prev_node.map, xo_objects_states))
                             return
                 elif xo_object.type == 2:  # Only disable
-                    if self.is_stand():
+                    # if self.is_stand():
+                    if data[0] == data[2] and data[1] == data[3]:  # stand
                         if prev_node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] == 1 and \
                                 prev_node.map[xo_object.managed_position[3]][xo_object.managed_position[2]] == 1:
                             xo_objects_states = list(prev_node.xo_objects_states)
@@ -249,7 +252,7 @@ class State:
     def notContain(self, node):
         for n in self.visited:
             if n.data[0] == node.data[0] and n.data[1] == node.data[1] and n.data[2] == node.data[2] \
-                     and n.data[3] == node.data[3]:
+                    and n.data[3] == node.data[3]:
                 if n.xo_objects_states == node.xo_objects_states:
                     return False
         return True
@@ -369,8 +372,8 @@ def main(level=LEVEL2_ARRAY):
     # state = State(Node((1, 1, 1, 1), None, "", LEVEL1_ARRAY), LEVEL1_ARRAY)
 
     # LEVEL2 SOLVER:
-    xo_objects = [XOObject(-3, (2, 2), (4, 4, 5, 4)), XOObject(3, (8, 1), (10, 4, 11, 4))]
-    state = State(Node((1, 4, 1, 4), None, "", LEVEL2_ARRAY, [False, False]), level, xo_objects)
+    # xo_objects = [XOObject(-3, (2, 2), (4, 4, 5, 4)), XOObject(3, (8, 1), (10, 4, 11, 4))]
+    # state = State(Node((1, 4, 1, 4), None, "", LEVEL2_ARRAY, [False, False]), level, xo_objects)
 
     # LEVEL3 SOLVER:
     # state = State(Node((1, 3, 1, 3), None, "", LEVEL3_ARRAY), LEVEL3_ARRAY)
@@ -379,9 +382,9 @@ def main(level=LEVEL2_ARRAY):
     # state = State(Node((1, 5, 1, 5), None, "", LEVEL4_ARRAY), LEVEL4_ARRAY)
 
     # Level 5 Solver :
-    # xo_objects = [XOObject(-3, (8, 1), (5, 1, 6, 1)), XOObject(-1, (3, 3), (5, 8, 6, 8)),
-    #               XOObject(-2, (6, 5), (5, 8, 6, 8)), XOObject(-3, (14, 6), (5, 8, 6, 8))]
-    # state = State(Node((13, 1, 13, 1), None, "", LEVEL5_ARRAY, [False, False, False, False]), LEVEL5_ARRAY, xo_objects)
+    xo_objects = [XOObject(-3, (8, 1), (5, 1, 6, 1)), XOObject(-1, (3, 3), (5, 8, 6, 8)),
+                  XOObject(-2, (6, 5), (5, 8, 6, 8)), XOObject(-3, (14, 6), (5, 8, 6, 8))]
+    state = State(Node((13, 1, 13, 1), None, "", LEVEL5_ARRAY, [False, False, False, False]), LEVEL5_ARRAY, xo_objects)
 
     # LEVEL6 SOLVER:
     # state = State(Node((0, 3, 0, 3), None, "", LEVEL6_ARRAY), LEVEL6_ARRAY)
