@@ -24,7 +24,8 @@
 #     [0, 0, 0, 0, 0, 1, 1, 1, 1, 0]
 # ])
 
-import copy
+import time
+
 LEVEL1_ARRAY = [
     [1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
     [1, 1, 1, 1, 1, 0, 0, 0, 0, 0],
@@ -139,7 +140,7 @@ class State:
         self.board = map_copy(board)
         self.states = [start]
         self.xo_objects = xo_objects
-        # self.visited = [start]
+        self.visited = [start]
 
     # self.all_moves = self.next_position()
 
@@ -185,7 +186,8 @@ class State:
                     data[2] == xo_object.position[0] and data[3] == xo_object.position[1]):
                 if xo_object.type == -3:
                     xo_objects_states = list(prev_node.xo_objects_states)
-                    xo_objects_states[self.xo_objects.index(xo_object)] = not xo_objects_states[self.xo_objects.index(xo_object)]
+                    xo_objects_states[self.xo_objects.index(xo_object)] = not xo_objects_states[
+                        self.xo_objects.index(xo_object)]
                     rv.append(Node(data, prev_node, direction, prev_node.map, xo_objects_states))
                     return
                 elif xo_object.type == 3:
@@ -231,19 +233,25 @@ class State:
                             return
         rv.append(Node(data, prev_node, direction, prev_node.map, prev_node.xo_objects_states))
 
-
     ####################################################################################################################
     # Function to check if the object repeated previous move (which could lead to infinite loop)
     # Created: SonPhan 23/04/2018
     ####################################################################################################################
+    # def notContain(self, node):
+    #     while prev:
+    #         if node.data[0] == prev.data[0] and node.data[1] == prev.data[1] and node.data[2] == prev.data[2] \
+    #                 and node.data[3] == prev.data[3]:
+    #             if node.xo_objects_states == prev.xo_objects_states:
+    #                 end = time.time()
+    #                 return False
+    #         prev = prev.prev_node
+    #     return True
     def notContain(self, node):
-        prev = node.prev_node
-        while prev:
-            if node.data[0] == prev.data[0] and node.data[1] == prev.data[1] and node.data[2] == prev.data[2] \
-                    and node.data[3] == prev.data[3]:
-                if node.xo_objects_states == prev.xo_objects_states:
+        for n in self.visited:
+            if n.data[0] == node.data[0] and n.data[1] == node.data[1] and n.data[2] == node.data[2] \
+                     and n.data[3] == node.data[3]:
+                if n.xo_objects_states == node.xo_objects_states:
                     return False
-            prev = prev.prev_node
         return True
 
     ####################################################################################################################
@@ -267,7 +275,7 @@ class State:
 
     def add_state(self, node):
         if self.notContain(node):
-            # self.visited.append(node)
+            self.visited.append(node)
             self.states.append(node)
             return True
         return False
@@ -333,9 +341,11 @@ class XOObject:
 # Function to solve by bfs
 ########################################################################################################################
 def bfs(state):
+    # start = time.time()
     current_state = Node
     # BFS operation
     while len(state.states) != 0:
+        # print(len(state.states))
         current_state = state.states.pop(0)
         state.set_player_position(current_state)
         if state.check_goal():
@@ -350,6 +360,8 @@ def bfs(state):
     # And print them out
     for action in path:
         print(action)
+    # end = time.time()
+    # print(end - start)
 
 
 def main(level=LEVEL2_ARRAY):
@@ -357,8 +369,8 @@ def main(level=LEVEL2_ARRAY):
     # state = State(Node((1, 1, 1, 1), None, "", LEVEL1_ARRAY), LEVEL1_ARRAY)
 
     # LEVEL2 SOLVER:
-    # xo_objects = [XOObject(-3, (2, 2), (4, 4, 5, 4)), XOObject(3, (8, 1), (10, 4, 11, 4))]
-    # state = State(Node((1, 4, 1, 4), None, "", LEVEL2_ARRAY), level, xo_objects)
+    xo_objects = [XOObject(-3, (2, 2), (4, 4, 5, 4)), XOObject(3, (8, 1), (10, 4, 11, 4))]
+    state = State(Node((1, 4, 1, 4), None, "", LEVEL2_ARRAY, [False, False]), level, xo_objects)
 
     # LEVEL3 SOLVER:
     # state = State(Node((1, 3, 1, 3), None, "", LEVEL3_ARRAY), LEVEL3_ARRAY)
@@ -367,9 +379,9 @@ def main(level=LEVEL2_ARRAY):
     # state = State(Node((1, 5, 1, 5), None, "", LEVEL4_ARRAY), LEVEL4_ARRAY)
 
     # Level 5 Solver :
-    xo_objects = [XOObject(-3, (8, 1), (5, 1, 6, 1)), XOObject(-1, (3, 3), (5, 8, 6, 8)),
-                  XOObject(-2, (6, 5), (5, 8, 6, 8)), XOObject(-3, (14, 6), (5, 8, 6, 8))]
-    state = State(Node((13, 1, 13, 1), None, "", LEVEL5_ARRAY, [False, False, False, False]), LEVEL5_ARRAY, xo_objects)
+    # xo_objects = [XOObject(-3, (8, 1), (5, 1, 6, 1)), XOObject(-1, (3, 3), (5, 8, 6, 8)),
+    #               XOObject(-2, (6, 5), (5, 8, 6, 8)), XOObject(-3, (14, 6), (5, 8, 6, 8))]
+    # state = State(Node((13, 1, 13, 1), None, "", LEVEL5_ARRAY, [False, False, False, False]), LEVEL5_ARRAY, xo_objects)
 
     # LEVEL6 SOLVER:
     # state = State(Node((0, 3, 0, 3), None, "", LEVEL6_ARRAY), LEVEL6_ARRAY)
