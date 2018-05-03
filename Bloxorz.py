@@ -1,3 +1,7 @@
+#!/usr/bin/python
+
+import sys
+
 ########################################################################################################################
 # Map description:
 # 1 is putable, 0 is abyss, 4 is goal (So far so well)
@@ -115,7 +119,7 @@ def map_copy(map):
 # Created: SonPhan 23/04/2018
 ########################################################################################################################
 class Node:
-    def __init__(self, data=(0, 0, 0, 0), prev_node=None, action="", map=[], xo_objects_states=[]):
+    def __init__(self, data=(0, 0, 0, 0), prev_node=None, action="", map=[], xo_objects_states={}):
         if not ((data[0] < data[2]) or ((data[0] == data[2]) and data[1] < data[3])):
             temp_data = (data[2], data[3], data[0], data[1])
             self.data = temp_data
@@ -124,7 +128,7 @@ class Node:
         self.prev_node = prev_node
         self.action = action
         self.map = map_copy(map)
-        self.xo_objects_states = list(xo_objects_states)
+        self.xo_objects_states = dict(xo_objects_states)
 
     def is_stand(self):
         return self.data[0] == self.data[2] and self.data[1] == self.data[3]
@@ -184,56 +188,22 @@ class State:
         for xo_object in self.xo_objects:
             if (data[0] == xo_object.position[0] and data[1] == xo_object.position[1]) or (
                     data[2] == xo_object.position[0] and data[3] == xo_object.position[1]):
-                if xo_object.type == -3:
-                    xo_objects_states = list(prev_node.xo_objects_states)
-                    xo_objects_states[self.xo_objects.index(xo_object)] = not xo_objects_states[
-                        self.xo_objects.index(xo_object)]
-                    rv.append(Node(data, prev_node, direction, prev_node.map, xo_objects_states))
-                    return
-                elif xo_object.type == 3:
-                    # if self.is_stand():
-                    if data[0] == data[2] and data[1] == data[3]:  # stand
-                        xo_objects_states = list(prev_node.xo_objects_states)
-                        xo_objects_states[self.xo_objects.index(xo_object)] = not xo_objects_states[
-                            self.xo_objects.index(xo_object)]
-                        rv.append(Node(data, prev_node, direction, prev_node.map, xo_objects_states))
-                        return
-                elif xo_object.type == -1:  # Only enable
-                    if prev_node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] == 0 and \
-                            prev_node.map[xo_object.managed_position[3]][xo_object.managed_position[2]] == 0:
-                        xo_objects_states = list(prev_node.xo_objects_states)
-                        xo_objects_states[self.xo_objects.index(xo_object)] = not xo_objects_states[
-                            self.xo_objects.index(xo_object)]
-                        rv.append(Node(data, prev_node, direction, prev_node.map, xo_objects_states))
-                        return
-                elif xo_object.type == -2:  # Only disable
-                    if prev_node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] == 1 and \
-                            prev_node.map[xo_object.managed_position[3]][xo_object.managed_position[2]] == 1:
-                        xo_objects_states = list(prev_node.xo_objects_states)
-                        xo_objects_states[self.xo_objects.index(xo_object)] = not xo_objects_states[
-                            self.xo_objects.index(xo_object)]
-                        rv.append(Node(data, prev_node, direction, prev_node.map, xo_objects_states))
-                        return
-                elif xo_object.type == 1:  # Only enable
-                    # if self.is_stand():
-                    if data[0] == data[2] and data[1] == data[3]:  # stand
-                        if prev_node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] == 0 and \
-                                prev_node.map[xo_object.managed_position[3]][xo_object.managed_position[2]] == 0:
-                            xo_objects_states = list(prev_node.xo_objects_states)
-                            xo_objects_states[self.xo_objects.index(xo_object)] = not xo_objects_states[
-                                self.xo_objects.index(xo_object)]
+                for m in xo_object.managed_position:
+                    if (xo_object.type == XOObject.TYPE_O) or (
+                            xo_object.type == XOObject.TYPE_X and data[0] == data[2] and data[1] == data[3]):
+                        if m.type == ManagedPosition.BOTH:
+                            xo_objects_states = dict(prev_node.xo_objects_states)
+                            xo_objects_states[(m.x, m.y)] = not xo_objects_states[(m.x, m.y)]
                             rv.append(Node(data, prev_node, direction, prev_node.map, xo_objects_states))
-                            return
-                elif xo_object.type == 2:  # Only disable
-                    # if self.is_stand():
-                    if data[0] == data[2] and data[1] == data[3]:  # stand
-                        if prev_node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] == 1 and \
-                                prev_node.map[xo_object.managed_position[3]][xo_object.managed_position[2]] == 1:
-                            xo_objects_states = list(prev_node.xo_objects_states)
-                            xo_objects_states[self.xo_objects.index(xo_object)] = not xo_objects_states[
-                                self.xo_objects.index(xo_object)]
+                        elif m.type == ManagedPosition.ONLY_ENABLE:
+                            xo_objects_states = dict(prev_node.xo_objects_states)
+                            xo_objects_states[(m.x, m.y)] = True
                             rv.append(Node(data, prev_node, direction, prev_node.map, xo_objects_states))
-                            return
+                        elif m.type == ManagedPosition.ONLY_DISABLE:
+                            xo_objects_states = dict(prev_node.xo_objects_states)
+                            xo_objects_states[(m.x, m.y)] = False
+                            rv.append(Node(data, prev_node, direction, prev_node.map, xo_objects_states))
+                return
         rv.append(Node(data, prev_node, direction, prev_node.map, prev_node.xo_objects_states))
 
     ####################################################################################################################
@@ -270,9 +240,7 @@ class State:
         if node.map[node.data[1]][node.data[0]] == 0 or node.map[node.data[3]][
             node.data[2]] == 0:
             return False
-        if node.data[0] == node.data[2] and node.data[1] == node.data[3] and node.map[node.data[1]][
-            node.data[0]] == 5 \
-                and node.map[node.data[3]][node.data[2]] == 5:
+        if node.data[0] == node.data[2] and node.data[1] == node.data[3] and node.map[node.data[1]][node.data[0]] == 5:
             return False
         return True
 
@@ -306,38 +274,35 @@ class State:
         for xo_object in self.xo_objects:
             if (self.x0 == xo_object.position[0] and self.y0 == xo_object.position[1]) or (
                     self.x1 == xo_object.position[0] and self.y1 == xo_object.position[1]):
-                if xo_object.type == -3:
-                    node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] = abs(
-                        node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] - 1)
-                    node.map[xo_object.managed_position[3]][xo_object.managed_position[2]] = abs(
-                        node.map[xo_object.managed_position[3]][xo_object.managed_position[2]] - 1)
-                elif xo_object.type == 3:
-                    if self.is_stand():
-                        node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] = abs(
-                            node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] - 1)
-                        node.map[xo_object.managed_position[3]][xo_object.managed_position[2]] = abs(
-                            node.map[xo_object.managed_position[3]][xo_object.managed_position[2]] - 1)
-                elif xo_object.type == -1:  # Only enable
-                    node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] = 1
-                    node.map[xo_object.managed_position[3]][xo_object.managed_position[2]] = 1
-                elif xo_object.type == -2:  # Only disable
-                    node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] = 0
-                    node.map[xo_object.managed_position[3]][xo_object.managed_position[2]] = 0
-                elif xo_object.type == 1:  # Only enable
-                    if self.is_stand():
-                        node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] = 1
-                        node.map[xo_object.managed_position[3]][xo_object.managed_position[2]] = 1
-                elif xo_object.type == 2:  # Only disable
-                    if self.is_stand():
-                        node.map[xo_object.managed_position[1]][xo_object.managed_position[0]] = 0
-                        node.map[xo_object.managed_position[3]][xo_object.managed_position[2]] = 0
+                for m in xo_object.managed_position:
+                    if xo_object.type == XOObject.TYPE_O or (xo_object.type == XOObject.TYPE_X and self.is_stand()):
+                        if m.type == ManagedPosition.BOTH:
+                            node.map[m.y][m.x] = abs(node.map[m.y][m.x] - 1)
+                        elif m.type == ManagedPosition.ONLY_ENABLE:
+                            node.map[m.y][m.x] = 1
+                        elif m.type == ManagedPosition.ONLY_DISABLE:
+                            node.map[m.y][m.x] = 0
 
 
 class XOObject:
-    def __init__(self, type, position=(0, 0), managed_position=(0, 0, 0, 0)):
+    TYPE_O = -1000
+    TYPE_X = 1000
+
+    def __init__(self, type, position=(0, 0), managed_position=[]):
         self.type = type
         self.position = position
         self.managed_position = managed_position
+
+
+class ManagedPosition:
+    ONLY_ENABLE = 123
+    ONLY_DISABLE = -123
+    BOTH = 12
+
+    def __init__(self, x, y, type):
+        self.x = x
+        self.y = y
+        self.type = type
 
 
 ########################################################################################################################
@@ -367,13 +332,19 @@ def bfs(state):
     # print(end - start)
 
 
-def main(level=LEVEL2_ARRAY):
+def main():
     # LEVEL1 SOLVER:
     # state = State(Node((1, 1, 1, 1), None, "", LEVEL1_ARRAY), LEVEL1_ARRAY)
 
     # LEVEL2 SOLVER:
-    # xo_objects = [XOObject(-3, (2, 2), (4, 4, 5, 4)), XOObject(3, (8, 1), (10, 4, 11, 4))]
-    # state = State(Node((1, 4, 1, 4), None, "", LEVEL2_ARRAY, [False, False]), level, xo_objects)
+    # xo_objects = [
+    #     XOObject(XOObject.TYPE_O, (2, 2),
+    #              [ManagedPosition(4, 4, ManagedPosition.BOTH), ManagedPosition(5, 4, ManagedPosition.BOTH)]),
+    #     XOObject(XOObject.TYPE_X, (8, 1),
+    #              [ManagedPosition(10, 4, ManagedPosition.BOTH), ManagedPosition(11, 4, ManagedPosition.BOTH)])]
+    # state = State(
+    #     Node((1, 4, 1, 4), None, "", LEVEL2_ARRAY, {(4, 4): False, (5, 4): False, (10, 4): False, (11, 4): False}),
+    #     LEVEL2_ARRAY, xo_objects)
 
     # LEVEL3 SOLVER:
     # state = State(Node((1, 3, 1, 3), None, "", LEVEL3_ARRAY), LEVEL3_ARRAY)
@@ -382,9 +353,17 @@ def main(level=LEVEL2_ARRAY):
     # state = State(Node((1, 5, 1, 5), None, "", LEVEL4_ARRAY), LEVEL4_ARRAY)
 
     # Level 5 Solver :
-    xo_objects = [XOObject(-3, (8, 1), (5, 1, 6, 1)), XOObject(-1, (3, 3), (5, 8, 6, 8)),
-                  XOObject(-2, (6, 5), (5, 8, 6, 8)), XOObject(-3, (14, 6), (5, 8, 6, 8))]
-    state = State(Node((13, 1, 13, 1), None, "", LEVEL5_ARRAY, [False, False, False, False]), LEVEL5_ARRAY, xo_objects)
+    xo_objects = [XOObject(XOObject.TYPE_O, (8, 1),
+                           [ManagedPosition(5, 1, ManagedPosition.BOTH), ManagedPosition(6, 1, ManagedPosition.BOTH)]),
+                  XOObject(XOObject.TYPE_O, (3, 3), [ManagedPosition(5, 8, ManagedPosition.ONLY_ENABLE),
+                                                     ManagedPosition(6, 8, ManagedPosition.ONLY_ENABLE)]),
+                  XOObject(XOObject.TYPE_O, (6, 5), [ManagedPosition(5, 8, ManagedPosition.ONLY_DISABLE),
+                                                     ManagedPosition(6, 8, ManagedPosition.ONLY_DISABLE)]),
+                  XOObject(XOObject.TYPE_O, (14, 6), [
+                      ManagedPosition(5, 8, ManagedPosition.BOTH), ManagedPosition(6, 8, ManagedPosition.BOTH)])]
+    state = State(
+        Node((13, 1, 13, 1), None, "", LEVEL5_ARRAY, {(5, 1): True, (6, 1): True, (5, 8): True, (6, 8): True}),
+        LEVEL5_ARRAY, xo_objects)
 
     # LEVEL6 SOLVER:
     # state = State(Node((0, 3, 0, 3), None, "", LEVEL6_ARRAY), LEVEL6_ARRAY)
