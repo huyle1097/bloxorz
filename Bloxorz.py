@@ -91,17 +91,28 @@ LEVEL6_ARRAY = [
     [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0]
 ]
 LEVEL7_ARRAY = [
-    [0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
-    [0, 1, 4, 1, 1, 0, 0, 0, 0, 0, 0, 0],
-    [0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
-    [0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0],
-    [0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0],
-    [1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1],
-    [0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1],
-    [0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1],
-    [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1],
-    [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0]
+    [0,0,0,0,0,0,0,0,1,1,1,1,0,0,0],
+	[0,0,0,0,0,0,0,0,1,1,1,1,0,0,0],
+	[1,1,1,0,0,0,0,0,1,0,0,1,1,1,1],
+	[1,1,1,1,1,1,1,1,1,0,0,0,1,4,1],
+	[1,1,1,0,0,0,0,1,1,3,0,0,1,1,1],
+	[1,1,1,0,0,0,0,1,1,1,0,0,1,1,1],
+	[0,1,1,0,0,0,0,1,0,0,0,0,0,0,0],
+	[0,0,1,1,1,1,1,1,0,0,0,0,0,0,0]
 ]
+LEVEL25_ARRAY= [
+    [0,0,1,1,0,0,0,0,0,0,0,0,0,0],
+	[0,0,1,1,1,0,0,0,0,0,0,0,0,0],
+	[0,0,1,1,10,0,0,0,0,0,1,1,1,0],
+	[0,0,0,1,1,1,1,0,0,0,1,4,1,0],
+	[0,0,0,0,0,0,1,1,0,0,1,1,1,0],
+	[0,1,1,0,0,0,1,1,0,0,0,0,0,0],
+	[1,1,20,1,1,1,1,1,0,0,0,0,0,0],
+	[1,1,1,0,0,0,1,1,0,0,0,1,1,1],
+	[1,1,1,0,0,0,1,1,10,1,1,1,1,1],
+	[0,0,0,0,0,0,0,0,0,0,0,1,1,1]
+]
+
 
 
 ########################################################################################################################
@@ -203,6 +214,8 @@ class State:
                             xo_objects_states = dict(prev_node.xo_objects_states)
                             xo_objects_states[(m.x, m.y)] = False
                             rv.append(Node(data, prev_node, direction, prev_node.map, xo_objects_states))
+                    else:
+                        rv.append(Node(data, prev_node, direction, prev_node.map, prev_node.xo_objects_states))
                 return
         rv.append(Node(data, prev_node, direction, prev_node.map, prev_node.xo_objects_states))
 
@@ -315,6 +328,8 @@ def bfs(state):
     while len(state.states) != 0:
         # print(len(state.states))
         current_state = state.states.pop(0)
+        # if current_state.data[0] == 1 and current_state.data[1] == 4 and current_state.data[2] == 1 and current_state.data[3] == 5:
+        #     print(1)
         state.set_player_position(current_state)
         if state.check_goal():
             break
@@ -353,20 +368,28 @@ def main():
     # state = State(Node((1, 5, 1, 5), None, "", LEVEL4_ARRAY), LEVEL4_ARRAY)
 
     # Level 5 Solver :
-    xo_objects = [XOObject(XOObject.TYPE_O, (8, 1),
-                           [ManagedPosition(5, 1, ManagedPosition.BOTH), ManagedPosition(6, 1, ManagedPosition.BOTH)]),
-                  XOObject(XOObject.TYPE_O, (3, 3), [ManagedPosition(5, 8, ManagedPosition.ONLY_ENABLE),
-                                                     ManagedPosition(6, 8, ManagedPosition.ONLY_ENABLE)]),
-                  XOObject(XOObject.TYPE_O, (6, 5), [ManagedPosition(5, 8, ManagedPosition.ONLY_DISABLE),
-                                                     ManagedPosition(6, 8, ManagedPosition.ONLY_DISABLE)]),
-                  XOObject(XOObject.TYPE_O, (14, 6), [
-                      ManagedPosition(5, 8, ManagedPosition.BOTH), ManagedPosition(6, 8, ManagedPosition.BOTH)])]
-    state = State(
-        Node((13, 1, 13, 1), None, "", LEVEL5_ARRAY, {(5, 1): True, (6, 1): True, (5, 8): True, (6, 8): True}),
-        LEVEL5_ARRAY, xo_objects)
+    # xo_objects = [XOObject(XOObject.TYPE_O, (8, 1),
+    #                        [ManagedPosition(5, 1, ManagedPosition.BOTH), ManagedPosition(6, 1, ManagedPosition.BOTH)]),
+    #               XOObject(XOObject.TYPE_O, (3, 3), [ManagedPosition(5, 8, ManagedPosition.ONLY_ENABLE),
+    #                                                  ManagedPosition(6, 8, ManagedPosition.ONLY_ENABLE)]),
+    #               XOObject(XOObject.TYPE_O, (6, 5), [ManagedPosition(5, 8, ManagedPosition.ONLY_DISABLE),
+    #                                                  ManagedPosition(6, 8, ManagedPosition.ONLY_DISABLE)]),
+    #               XOObject(XOObject.TYPE_O, (14, 6), [
+    #                   ManagedPosition(5, 8, ManagedPosition.BOTH), ManagedPosition(6, 8, ManagedPosition.BOTH)])]
+    # state = State(
+    #     Node((13, 1, 13, 1), None, "", LEVEL5_ARRAY, {(5, 1): True, (6, 1): True, (5, 8): True, (6, 8): True}),
+    #     LEVEL5_ARRAY, xo_objects)
 
     # LEVEL6 SOLVER:
     # state = State(Node((0, 3, 0, 3), None, "", LEVEL6_ARRAY), LEVEL6_ARRAY)
+
+    xo_objects = [XOObject(XOObject.TYPE_X, (9, 4),[ManagedPosition(3, 6, ManagedPosition.BOTH)])]
+    state = State(Node((1, 3, 1, 3), None, "", LEVEL7_ARRAY, {(3, 6): False}), LEVEL7_ARRAY, xo_objects)
+
+    #LV25
+    # xo_objects = [XOObject(XOObject.TYPE_O, (4, 2),[ManagedPosition(8, 4, ManagedPosition. BOTH),ManagedPosition(9,4,ManagedPosition.BOTH),ManagedPosition(13,2,ManagedPosition.BOTH),ManagedPosition(13,3,ManagedPosition.BOTH)]),XOObject(XOObject.TYPE_X,(2,6),[ManagedPosition(8, 4,ManagedPosition.ONLY_ENABLE),ManagedPosition(9,4,ManagedPosition.ONLY_ENABLE)]),XOObject(XOObject.TYPE_O,(8,8),[ManagedPosition(4,6,ManagedPosition.ONLY_DISABLE),ManagedPosition(5,6,ManagedPosition.ONLY_DISABLE),ManagedPosition(7,3,ManagedPosition.ONLY_ENABLE)])]
+    # state = State(Node((1,7, 1, 7), None, "", LEVEL25_ARRAY, {(4, 6): True,(5,6):True,(7,3):False,(8,4):False,(9,4):False,(13,2):False,(13,3):False}),
+    #               LEVEL25_ARRAY, xo_objects)
 
     bfs(state)
 
