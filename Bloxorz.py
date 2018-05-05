@@ -464,10 +464,9 @@ def draw_map(screen, node):
 
 
 class Level:
-    def __init__(self, level_array, state, xo_objects=[]):
-        self.level_array = level_array
+    def __init__(self, state):
         self.state = state
-        self.xo_objects = xo_objects
+
 
 
 def init_levels():
@@ -476,7 +475,7 @@ def init_levels():
         levels_array.append(None)
     # LEVEL1 SOLVER:
     state1 = State(Node((1, 1, 1, 1), None, "", LEVEL1_ARRAY), LEVEL1_ARRAY)
-    levels_array[0] = Level(LEVEL1_ARRAY, state1)
+    levels_array[0] = Level( state1)
 
     # LEVEL2 SOLVER:
     xo_objects2 = [
@@ -487,15 +486,15 @@ def init_levels():
     state2 = State(
         Node((1, 4, 1, 4), None, "", LEVEL2_ARRAY, {(4, 4): False, (5, 4): False, (10, 4): False, (11, 4): False}),
         LEVEL2_ARRAY, xo_objects2)
-    levels_array[1] = Level(LEVEL2_ARRAY, state2, xo_objects2)
+    levels_array[1] = Level( state2)
 
     # LEVEL3 SOLVER:
     state3 = State(Node((1, 3, 1, 3), None, "", LEVEL3_ARRAY), LEVEL3_ARRAY)
-    levels_array[2] = Level(LEVEL3_ARRAY, state3)
+    levels_array[2] = Level( state3)
 
     # LEVEL4 SOLVER:
     state4 = State(Node((1, 5, 1, 5), None, "", LEVEL4_ARRAY), LEVEL4_ARRAY)
-    levels_array[3] = Level(LEVEL4_ARRAY, state4)
+    levels_array[3] = Level( state4)
 
     # Level 5 Solver :
     xo_objects5 = [XOObject(XOObject.TYPE_O, (8, 1),
@@ -509,16 +508,16 @@ def init_levels():
     state5 = State(
         Node((13, 1, 13, 1), None, "", LEVEL5_ARRAY, {(5, 1): True, (6, 1): True, (5, 8): True, (6, 8): True}),
         LEVEL5_ARRAY, xo_objects5)
-    levels_array[4] = Level(LEVEL5_ARRAY, state5, xo_objects5)
+    levels_array[4] = Level( state5)
 
     # LEVEL6 SOLVER:
     state6 = State(Node((0, 3, 0, 3), None, "", LEVEL6_ARRAY), LEVEL6_ARRAY)
-    levels_array[5] = Level(LEVEL6_ARRAY, state6)
+    levels_array[5] = Level( state6)
 
     # LEVEL7 SOLVER
     xo_objects7 = [XOObject(XOObject.TYPE_X, (9, 4), [ManagedPosition(3, 6, ManagedPosition.BOTH)])]
     state7 = State(Node((1, 3, 1, 3), None, "", LEVEL7_ARRAY, {(3, 6): False}), LEVEL7_ARRAY, xo_objects7)
-    levels_array[6] = Level(LEVEL7_ARRAY, state7, xo_objects7)
+    levels_array[6] = Level( state7)
 
     # LEVEL25 SOLVER
     xo_objects25 = [XOObject(XOObject.TYPE_O, (4, 2),
@@ -533,7 +532,7 @@ def init_levels():
                          {(4, 6): True, (5, 6): True, (7, 3): False, (8, 4): False, (9, 4): False, (13, 2): False,
                           (13, 3): False}),
                     LEVEL25_ARRAY, xo_objects25)
-    levels_array[24] = Level(LEVEL25_ARRAY, state25,xo_objects25)
+    levels_array[24] = Level( state25)
 
     # Level 11 Solver :
     xo_objects11 = [XOObject(XOObject.TYPE_O, (6, 6),
@@ -542,7 +541,7 @@ def init_levels():
     state11 = State(Node((0, 5, 0, 5), None, "", LEVEL11_ARRAY, {(4, 0): True, (4, 1): True}),
                   LEVEL11_ARRAY, xo_objects11)
 
-    levels_array[10] = Level(LEVEL11_ARRAY, state11, xo_objects11)
+    levels_array[10] = Level( state11)
 
     # Level 12 Solver :
     xo_objects12 = [XOObject(XOObject.TYPE_X, (6, 2),
@@ -551,11 +550,11 @@ def init_levels():
     state12 = State(Node((2, 6, 2, 6), None, "", LEVEL12_ARRAY, {(12, 2): False, (6, 4): False}),
                   LEVEL12_ARRAY, xo_objects12)
 
-    levels_array[11] = Level(LEVEL11_ARRAY, state12, xo_objects12)
+    levels_array[11] = Level( state12)
 
     # LEVEL13 SOLVER:
     state13 = State(Node((12, 3, 12, 3), None, "", LEVEL13_ARRAY), LEVEL13_ARRAY)
-    levels_array[12] = Level(LEVEL13_ARRAY, state13)
+    levels_array[12] = Level( state13)
 
     # LEVEL14 SOLVER:
     xo_objects14 = [XOObject(XOObject.TYPE_X, (12, 3),
@@ -565,7 +564,7 @@ def init_levels():
     state14 = State(
         Node((4, 2, 4, 2), None, "", LEVEL14_ARRAY, {(1, 2): False, (2, 2): False, (1, 3): False, (2, 3): False}),
         LEVEL14_ARRAY, xo_objects14)
-    levels_array[13] = Level(LEVEL14_ARRAY, state14,xo_objects14)
+    levels_array[13] = Level( state14)
 
     # LEVEL17 SOLVER:
     xo_objects17 = [XOObject(XOObject.TYPE_O, (1, 8),
@@ -578,7 +577,7 @@ def init_levels():
     state17 = State(Node((1, 1, 1, 1), None, "", LEVEL17_ARRAY,
                        {(1, 8): False, (8, 7): False, (6, 6): False, (7, 2): False, (8, 7): False, (9, 1): False}),
                   LEVEL17_ARRAY, xo_objects17)
-    levels_array[16] = Level(LEVEL17_ARRAY, state17,xo_objects17)
+    levels_array[16] = Level( state17)
 
     # LEVEL19 SOLVER:
     xo_objects19 = [XOObject(XOObject.TYPE_O, (10, 0),
@@ -590,7 +589,7 @@ def init_levels():
     state19 = State(
         Node((1, 0, 1, 0), None, "", LEVEL19_ARRAY, {(7, 5): False, (8, 5): False, (9, 2): True, (9, 3): True}),
         LEVEL19_ARRAY, xo_objects19)
-    levels_array[18] = Level(LEVEL19_ARRAY, state19, xo_objects19)
+    levels_array[18] = Level( state19)
 
     # LEVEL21 SOLVER:
     xo_objects21 = [XOObject(XOObject.TYPE_X, (8, 5),
@@ -598,7 +597,7 @@ def init_levels():
                   XOObject(XOObject.TYPE_X, (8, 6), [ManagedPosition(5, 7, ManagedPosition.BOTH)])]
     state21 = State(Node((1, 3, 1, 3), None, "", LEVEL21_ARRAY, {(3, 9): False, (5, 7): False}),
                   LEVEL21_ARRAY, xo_objects21)
-    levels_array[20] = Level(LEVEL21_ARRAY, state21, xo_objects21)
+    levels_array[20] = Level(state21)
 
     # LEVEL32 SOLVER:
     xo_objects32 = [XOObject(XOObject.TYPE_X, (13, 0),
@@ -611,7 +610,7 @@ def init_levels():
     state32 = State(Node((10, 6, 10, 6), None, "", LEVEL32_ARRAY,
                        {(4, 1): True, (5, 1): True, (2, 7): False, (3, 7): False, (2, 8): False, (3, 8): False,
                         (4, 2): False, (5, 2): False}), LEVEL32_ARRAY, xo_objects32)
-    levels_array[31] = Level(LEVEL32_ARRAY, state32, xo_objects32)
+    levels_array[31] = Level(state32)
 
 
     return levels_array
@@ -628,8 +627,8 @@ def main():
     path = bfs(levels_array[level_choice - 1].state)
     pygame.init()
     pygame.display.set_caption("Bloxorz")
-    height = len(levels_array[level_choice - 1].level_array)
-    width = len(levels_array[level_choice - 1].level_array[0])
+    height = len(levels_array[level_choice - 1].state.board)
+    width = len(levels_array[level_choice - 1].state.board[0])
     screen = pygame.display.set_mode((width * 100, height * 100))
     i = 0
     while not done:
