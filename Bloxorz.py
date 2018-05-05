@@ -120,7 +120,108 @@ LEVEL25_ARRAY = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1]
 ]
 
+LEVEL11_ARRAY=[
+    [0,1,1,1,1,0,0,0,0,0,0,0],
+	[0,1,4,1,1,0,0,0,0,0,0,0],
+	[0,1,1,1,0,0,0,0,0,0,0,0],
+	[0,1,0,0,0,1,1,1,1,1,1,0],
+	[0,1,0,0,0,1,1,0,0,1,1,0],
+	[1,1,1,1,1,1,1,0,0,1,1,1],
+	[0,0,0,0,0,1,-2,0,0,0,0,1],
+	[0,0,0,0,0,1,1,1,1,0,0,1],
+	[0,0,0,0,0,1,1,1,1,1,1,1],
+	[0,0,0,0,0,0,0,0,1,1,1,0]
+]
 
+LEVEL12_ARRAY=[
+    [0,0,0,0,0,0,0,0,0,0,0,0,2],
+	[0,0,0,0,0,1,1,1,0,0,1,1,1],
+	[0,0,0,0,0,1,2,1,1,1,1,1,0],
+	[0,0,0,1,1,1,1,1,0,0,1,1,0],
+	[0,0,0,1,4,1,0,0,0,0,1,1,0],
+	[0,1,1,1,1,1,0,0,0,1,1,1,1],
+	[1,1,1,1,0,0,0,0,0,1,1,1,1],
+	[1,1,1,1,0,0,1,1,1,1,1,0,0],
+	[0,0,0,0,0,1,1,1,0,0,0,0,0],
+	[0,0,0,0,0,1,1,1,0,0,0,0,0]
+]
+
+LEVEL13_ARRAY = [
+    [1,1,1,5,1,1,1,1,2,1,1,1,1,0],
+	[1,1,0,0,0,0,0,0,0,0,1,1,1,0],
+	[1,1,0,0,0,0,0,0,0,0,0,1,1,1],
+	[1,1,1,0,0,0,1,1,1,0,0,1,1,1],
+	[1,1,1,5,5,5,1,4,1,0,0,1,1,1],
+	[1,1,1,0,0,5,1,1,1,0,0,1,0,0],
+	[0,0,1,0,0,5,5,5,5,5,1,1,0,0],
+	[0,0,1,1,1,5,5,1,5,5,5,0,0,0],
+	[0,0,0,1,1,5,5,5,5,5,5,0,0,0],
+	[0,0,0,1,1,1,0,0,1,1,0,0,0,0]
+]
+
+LEVEL14_ARRAY=[
+    [0,0,0,0,0,0,0,0,1,1,1,0,0,0],
+	[0,0,0,1,1,1,0,0,1,1,1,0,0,0],
+	[1,0,0,1,1,1,1,1,1,1,1,1,1,1],
+	[1,0,0,1,1,1,0,0,0,0,0,0,2,1],
+	[1,0,0,0,0,0,0,0,0,0,0,0,1,1],
+	[1,0,0,0,0,0,0,0,0,0,0,0,1,1],
+	[1,0,0,0,0,0,0,0,1,1,1,1,1,1],
+	[1,1,1,1,1,0,0,0,1,1,1,0,0,0],
+	[0,1,1,4,1,0,0,0,1,1,1,0,0,0],
+	[0,0,1,1,1,0,0,0,1,1,1,1,1,2]
+]
+
+LEVEL17_ARRAY = [
+    [1,1,1,0,0,0,0,0,0,0,0,0,0,0,0],
+	[1,1,1,1,1,1,1,1,1,0,0,0,1,1,1],
+	[1,1,1,0,0,0,0,0,1,1,1,1,1,4,1],
+	[1,1,1,0,0,0,0,0,0,0,0,0,2,2,1],
+	[1,1,1,0,0,0,0,0,0,0,0,0,0,0,0],
+	[1,1,1,0,0,0,0,0,0,0,0,0,0,0,0],
+	[1,1,1,0,0,0,0,1,1,1,1,1,2,0,0],
+	[1,1,1,1,1,1,1,1,0,0,0,1,1,0,0],
+	[1,-2,1,0,0,0,0,0,0,0,0,1,1,0,0],
+	[1,1,1,0,0,0,0,0,0,0,0,1,2,0,0]
+]
+
+LEVEL19_ARRAY = [
+    [0,1,1,1,1,1,1,1,1,1,-2,1,1,1,1],
+	[0,0,0,0,0,1,1,0,0,0,0,0,0,1,1],
+	[0,0,0,0,0,1,1,0,0,0,0,0,0,1,1],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,1,1],
+	[0,0,0,0,0,0,0,0,0,0,0,0,0,1,1],
+	[1,1,1,0,0,1,1,0,0,1,-2,1,1,1,1],
+	[1,4,1,0,0,1,1,0,0,0,0,0,0,0,0],
+	[1,1,1,0,0,1,1,0,0,0,0,0,0,0,0],
+	[0,1,1,0,0,1,1,0,0,0,0,0,0,0,0],
+	[0,1,1,1,1,1,1,1,1,1,-2,1,1,1,0]
+]
+
+LEVEL21_ARRAY=[
+    [0,0,0,0,0,0,0,0,1,1,0,0,0,0,0],
+	[0,0,0,0,0,0,0,1,1,1,0,0,0,0,0],
+	[1,1,0,0,1,1,1,1,1,1,0,0,0,0,0],
+	[1,1,1,1,1,1,0,0,1,0,0,0,0,0,0],
+	[1,1,1,1,0,0,0,0,1,0,0,0,1,1,1],
+	[0,1,1,0,0,0,0,0,2,1,1,1,1,4,1],
+	[0,0,1,0,0,0,0,0,2,1,0,0,1,1,1],
+	[0,0,1,1,1,0,0,0,1,1,0,0,0,0,0],
+	[0,0,0,1,1,1,0,0,1,1,0,0,0,0,0],
+	[0,0,0,0,1,1,1,1,1,1,0,0,0,0,0]
+]
+
+LEVEL32_ARRAY=[
+    [0,0,0,0,0,0,0,0,0,0,0,0,1,2],
+	[0,0,1,1,1,1,1,1,0,0,0,1,1,1],
+	[0,1,1,1,0,0,1,1,0,0,1,2,1,1],
+	[0,1,4,1,0,0,0,1,1,1,1,1,0,0],
+	[0,1,1,1,0,0,0,0,1,1,1,0,0,0],
+	[0,0,0,0,0,0,0,0,0,1,1,0,0,0],
+	[0,0,0,0,1,1,1,0,0,1,1,0,0,0],
+	[1,1,0,0,1,2,1,0,0,1,1,0,0,0],
+	[1,1,0,0,1,1,1,1,1,1,1,0,0,0]
+]
 ########################################################################################################################
 # Function map_copy. (Because python's deepcopy is extremely slow so I implement my own deepcopy)
 ########################################################################################################################
@@ -433,6 +534,85 @@ def init_levels():
                           (13, 3): False}),
                     LEVEL25_ARRAY, xo_objects25)
     levels_array[24] = Level(LEVEL25_ARRAY, state25,xo_objects25)
+
+    # Level 11 Solver :
+    xo_objects11 = [XOObject(XOObject.TYPE_O, (6, 6),
+                           [ManagedPosition(4, 0, ManagedPosition.ONLY_DISABLE),
+                            ManagedPosition(4, 1, ManagedPosition.ONLY_DISABLE)])]
+    state11 = State(Node((0, 5, 0, 5), None, "", LEVEL11_ARRAY, {(4, 0): True, (4, 1): True}),
+                  LEVEL11_ARRAY, xo_objects11)
+
+    levels_array[10] = Level(LEVEL11_ARRAY, state11, xo_objects11)
+
+    # Level 12 Solver :
+    xo_objects12 = [XOObject(XOObject.TYPE_X, (6, 2),
+                           [ManagedPosition(12, 2, ManagedPosition.BOTH)]),
+                  XOObject(XOObject.TYPE_X, (12, 0), [ManagedPosition(6, 4, ManagedPosition.BOTH)])]
+    state12 = State(Node((2, 6, 2, 6), None, "", LEVEL12_ARRAY, {(12, 2): False, (6, 4): False}),
+                  LEVEL12_ARRAY, xo_objects12)
+
+    levels_array[11] = Level(LEVEL11_ARRAY, state12, xo_objects12)
+
+    # LEVEL13 SOLVER:
+    state13 = State(Node((12, 3, 12, 3), None, "", LEVEL13_ARRAY), LEVEL13_ARRAY)
+    levels_array[12] = Level(LEVEL13_ARRAY, state13)
+
+    # LEVEL14 SOLVER:
+    xo_objects14 = [XOObject(XOObject.TYPE_X, (12, 3),
+                           [ManagedPosition(1, 2, ManagedPosition.BOTH), ManagedPosition(2, 2, ManagedPosition.BOTH)]),
+                  XOObject(XOObject.TYPE_X, (13, 9),
+                           [ManagedPosition(1, 3, ManagedPosition.BOTH), ManagedPosition(2, 3, ManagedPosition.BOTH)])]
+    state14 = State(
+        Node((4, 2, 4, 2), None, "", LEVEL14_ARRAY, {(1, 2): False, (2, 2): False, (1, 3): False, (2, 3): False}),
+        LEVEL14_ARRAY, xo_objects14)
+    levels_array[13] = Level(LEVEL14_ARRAY, state14,xo_objects14)
+
+    # LEVEL17 SOLVER:
+    xo_objects17 = [XOObject(XOObject.TYPE_O, (1, 8),
+                           [ManagedPosition(8, 7, ManagedPosition.BOTH)]),
+                  XOObject(XOObject.TYPE_X, (12, 3), [ManagedPosition(6, 6, ManagedPosition.ONLY_DISABLE)]),
+                  XOObject(XOObject.TYPE_X, (13, 3), [ManagedPosition(6, 6, ManagedPosition.ONLY_ENABLE)]),
+                  XOObject(XOObject.TYPE_X, (12, 6), [ManagedPosition(7, 2, ManagedPosition.ONLY_ENABLE)]),
+                  XOObject(XOObject.TYPE_X, (12, 9), [ManagedPosition(8, 7, ManagedPosition.ONLY_DISABLE),
+                                                      ManagedPosition(9, 1, ManagedPosition.ONLY_ENABLE)])]
+    state17 = State(Node((1, 1, 1, 1), None, "", LEVEL17_ARRAY,
+                       {(1, 8): False, (8, 7): False, (6, 6): False, (7, 2): False, (8, 7): False, (9, 1): False}),
+                  LEVEL17_ARRAY, xo_objects17)
+    levels_array[16] = Level(LEVEL17_ARRAY, state17,xo_objects17)
+
+    # LEVEL19 SOLVER:
+    xo_objects19 = [XOObject(XOObject.TYPE_O, (10, 0),
+                           [ManagedPosition(7, 5, ManagedPosition.BOTH), ManagedPosition(8, 5, ManagedPosition.BOTH)]),
+                  XOObject(XOObject.TYPE_O, (10, 5), [ManagedPosition(9, 2, ManagedPosition.ONLY_DISABLE),
+                                                      ManagedPosition(9, 3, ManagedPosition.ONLY_DISABLE)]),
+                  XOObject(XOObject.TYPE_O, (10, 9), [ManagedPosition(9, 2, ManagedPosition.ONLY_ENABLE),
+                                                      ManagedPosition(9, 3, ManagedPosition.ONLY_ENABLE)])]
+    state19 = State(
+        Node((1, 0, 1, 0), None, "", LEVEL19_ARRAY, {(7, 5): False, (8, 5): False, (9, 2): True, (9, 3): True}),
+        LEVEL19_ARRAY, xo_objects19)
+    levels_array[18] = Level(LEVEL19_ARRAY, state19, xo_objects19)
+
+    # LEVEL21 SOLVER:
+    xo_objects21 = [XOObject(XOObject.TYPE_X, (8, 5),
+                           [ManagedPosition(3, 9, ManagedPosition.BOTH)]),
+                  XOObject(XOObject.TYPE_X, (8, 6), [ManagedPosition(5, 7, ManagedPosition.BOTH)])]
+    state21 = State(Node((1, 3, 1, 3), None, "", LEVEL21_ARRAY, {(3, 9): False, (5, 7): False}),
+                  LEVEL21_ARRAY, xo_objects21)
+    levels_array[20] = Level(LEVEL21_ARRAY, state21, xo_objects21)
+
+    # LEVEL32 SOLVER:
+    xo_objects32 = [XOObject(XOObject.TYPE_X, (13, 0),
+                           [ManagedPosition(4, 1, ManagedPosition.BOTH), ManagedPosition(5, 1, ManagedPosition.BOTH),
+                            ManagedPosition(2, 7, ManagedPosition.BOTH), ManagedPosition(3, 7, ManagedPosition.BOTH)]),
+                  XOObject(XOObject.TYPE_X, (11, 2),
+                           [ManagedPosition(2, 8, ManagedPosition.BOTH), ManagedPosition(3, 8, ManagedPosition.BOTH)]),
+                  XOObject(XOObject.TYPE_X, (5, 7),
+                           [ManagedPosition(4, 2, ManagedPosition.BOTH), ManagedPosition(5, 2, ManagedPosition.BOTH)])]
+    state32 = State(Node((10, 6, 10, 6), None, "", LEVEL32_ARRAY,
+                       {(4, 1): True, (5, 1): True, (2, 7): False, (3, 7): False, (2, 8): False, (3, 8): False,
+                        (4, 2): False, (5, 2): False}), LEVEL32_ARRAY, xo_objects32)
+    levels_array[31] = Level(LEVEL32_ARRAY, state32, xo_objects32)
+
 
     return levels_array
 
