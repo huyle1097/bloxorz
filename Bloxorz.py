@@ -257,6 +257,9 @@ class Node:
 ########################################################################################################################
 
 class State:
+    DFS = -120
+    BFS = 120
+
     def __init__(self, start, board=LEVEL1_ARRAY, xo_objects=None):
         if xo_objects is None:
             xo_objects = []
@@ -347,21 +350,24 @@ class State:
             return False
         return True
 
-    def add_state(self, node):
+    def add_state(self, node, method):
         if self.notContain(node):
             self.visited.append(node)
-            self.states.append(node)
+            if method == self.BFS:
+                self.states.append(node)
+            else:
+                self.states.insert(0, node)
             return True
         return False
 
-    def add_valid_state(self, prev_node):
+    def add_valid_state(self, prev_node, method):
         list_node = self.next_position(prev_node)
         if not list_node:
             return False
         else:
             for node in list_node:
                 if self.is_valid(node):
-                    self.add_state(node)
+                    self.add_state(node, method)
 
     def is_goal(self, x, y):
         return self.board[y][x] == 4
@@ -421,7 +427,33 @@ def bfs(state):
         state.set_player_position(current_state)
         if state.check_goal():
             break
-        state.add_valid_state(current_state)
+        state.add_valid_state(current_state, State.BFS)
+    pointer = current_state
+    path = []
+    # Backtracking all the previous moves to reach this goal state
+    while pointer:
+        path.insert(0, pointer)
+        pointer = pointer.prev_node
+    # And print them out
+    for p in path:
+        print(p.action)
+    return path
+
+
+########################################################################################################################
+# Function to solve by bfs
+########################################################################################################################
+def dfs(state):
+    # start = time.time()
+    current_state = Node
+    # BFS operation
+    while len(state.states) != 0:
+
+        current_state = state.states.pop(0)
+        state.set_player_position(current_state)
+        if state.check_goal():
+            break
+        state.add_valid_state(current_state, State.DFS)
     pointer = current_state
     path = []
     # Backtracking all the previous moves to reach this goal state
@@ -634,12 +666,16 @@ def init_levels():
 def main():
     levels_array = init_levels()
     level_choice = int(input("Nhap level: "))
+    method_choice = int(input("Nhap method (BFS: 0, DFS: 1): "))
     if levels_array[level_choice - 1] is None:
         print("Chua lam level nay :v")
         return
 
     done = False
-    path = bfs(levels_array[level_choice - 1].state)
+    if method_choice == 0:
+        path = bfs(levels_array[level_choice - 1].state)
+    else:
+        path = dfs(levels_array[level_choice - 1].state)
     pygame.init()
     pygame.display.set_caption("Bloxorz")
 
