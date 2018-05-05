@@ -679,7 +679,7 @@ def test(levels_array, is_dfs):
         str_level = str(levels_array.index(level) + 1)
         success = str(level.state.board[data[1]][data[0]] == 4)
         end = time.time()
-        print("Level " + str_level + ": " + success + ": " + str(round(end - start, 4)))
+        print("Level " + str_level + ": " + success + ": " + str(round(end - start, 4)) + "s")
     return
 
 
