@@ -18,7 +18,7 @@ import sys, pygame
 # Vertical object: (x,y),(x,y)
 # Goal state: isStand and map(y,x) = 4
 ########################################################################################################################
-
+# State
 # LEVEL_ARRAY = np.array([
 #     [1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
 #     [1, 1, 1, 1, 1, 0, 0, 0, 0, 0],
@@ -435,8 +435,8 @@ def bfs(state):
         path.insert(0, pointer)
         pointer = pointer.prev_node
     # And print them out
-    for p in path:
-        print(p.action)
+    # for p in path:
+    #     print(p.action)
     return path
 
 
@@ -461,8 +461,8 @@ def dfs(state):
         path.insert(0, pointer)
         pointer = pointer.prev_node
     # And print them out
-    for p in path:
-        print(p.action)
+    # for p in path:
+    #     print(p.action)
     return path
 
 
@@ -663,14 +663,37 @@ def init_levels():
     return levels_array
 
 
+def test(levels_array, is_dfs):
+    ######################
+    # TEST################
+    for level in levels_array:
+        if level is None:
+            continue
+        start = time.time()
+        if is_dfs:
+            path = bfs(level.state)
+        else:
+            path = dfs(level.state)
+        data = path[len(path) - 1].data
+
+        str_level = str(levels_array.index(level) + 1)
+        success = str(level.state.board[data[1]][data[0]] == 4)
+        end = time.time()
+        print("Level " + str_level + ": " + success + ": " + str(round(end - start, 4)))
+    return
+
+
 def main():
     levels_array = init_levels()
-    level_choice = int(input("Nhap level: "))
     method_choice = int(input("Nhap method (BFS: 0, DFS: 1): "))
+    is_test = int(input("Test hay xem UI?: (Test: 1, xem UI: 0): "))
+    if is_test:
+        test(levels_array, method_choice)  #
+        return
+    level_choice = int(input("Nhap level: "))
     if levels_array[level_choice - 1] is None:
         print("Chua lam level nay :v")
         return
-
     done = False
     if method_choice == 0:
         path = bfs(levels_array[level_choice - 1].state)
