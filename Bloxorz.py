@@ -671,9 +671,9 @@ def test(levels_array, is_dfs):
             continue
         start = time.time()
         if is_dfs:
-            path = bfs(level.state)
-        else:
             path = dfs(level.state)
+        else:
+            path = bfs(level.state)
         data = path[len(path) - 1].data
 
         str_level = str(levels_array.index(level) + 1)
