@@ -120,108 +120,110 @@ LEVEL25_ARRAY = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1]
 ]
 
-LEVEL11_ARRAY=[
-    [0,1,1,1,1,0,0,0,0,0,0,0],
-	[0,1,4,1,1,0,0,0,0,0,0,0],
-	[0,1,1,1,0,0,0,0,0,0,0,0],
-	[0,1,0,0,0,1,1,1,1,1,1,0],
-	[0,1,0,0,0,1,1,0,0,1,1,0],
-	[1,1,1,1,1,1,1,0,0,1,1,1],
-	[0,0,0,0,0,1,-2,0,0,0,0,1],
-	[0,0,0,0,0,1,1,1,1,0,0,1],
-	[0,0,0,0,0,1,1,1,1,1,1,1],
-	[0,0,0,0,0,0,0,0,1,1,1,0]
+LEVEL11_ARRAY = [
+    [0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 4, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0],
+    [0, 1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 0],
+    [1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1],
+    [0, 0, 0, 0, 0, 1, -2, 0, 0, 0, 0, 1],
+    [0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 1],
+    [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1],
+    [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0]
 ]
 
-LEVEL12_ARRAY=[
-    [0,0,0,0,0,0,0,0,0,0,0,0,2],
-	[0,0,0,0,0,1,1,1,0,0,1,1,1],
-	[0,0,0,0,0,1,2,1,1,1,1,1,0],
-	[0,0,0,1,1,1,1,1,0,0,1,1,0],
-	[0,0,0,1,4,1,0,0,0,0,1,1,0],
-	[0,1,1,1,1,1,0,0,0,1,1,1,1],
-	[1,1,1,1,0,0,0,0,0,1,1,1,1],
-	[1,1,1,1,0,0,1,1,1,1,1,0,0],
-	[0,0,0,0,0,1,1,1,0,0,0,0,0],
-	[0,0,0,0,0,1,1,1,0,0,0,0,0]
+LEVEL12_ARRAY = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2],
+    [0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1],
+    [0, 0, 0, 0, 0, 1, 2, 1, 1, 1, 1, 1, 0],
+    [0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0],
+    [0, 0, 0, 1, 4, 1, 0, 0, 0, 0, 1, 1, 0],
+    [0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1],
+    [1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1],
+    [1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0],
+    [0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0]
 ]
 
 LEVEL13_ARRAY = [
-    [1,1,1,5,1,1,1,1,2,1,1,1,1,0],
-	[1,1,0,0,0,0,0,0,0,0,1,1,1,0],
-	[1,1,0,0,0,0,0,0,0,0,0,1,1,1],
-	[1,1,1,0,0,0,1,1,1,0,0,1,1,1],
-	[1,1,1,5,5,5,1,4,1,0,0,1,1,1],
-	[1,1,1,0,0,5,1,1,1,0,0,1,0,0],
-	[0,0,1,0,0,5,5,5,5,5,1,1,0,0],
-	[0,0,1,1,1,5,5,1,5,5,5,0,0,0],
-	[0,0,0,1,1,5,5,5,5,5,5,0,0,0],
-	[0,0,0,1,1,1,0,0,1,1,0,0,0,0]
+    [1, 1, 1, 5, 1, 1, 1, 1, 2, 1, 1, 1, 1, 0],
+    [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0],
+    [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1],
+    [1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1],
+    [1, 1, 1, 5, 5, 5, 1, 4, 1, 0, 0, 1, 1, 1],
+    [1, 1, 1, 0, 0, 5, 1, 1, 1, 0, 0, 1, 0, 0],
+    [0, 0, 1, 0, 0, 5, 5, 5, 5, 5, 1, 1, 0, 0],
+    [0, 0, 1, 1, 1, 5, 5, 1, 5, 5, 5, 0, 0, 0],
+    [0, 0, 0, 1, 1, 5, 5, 5, 5, 5, 5, 0, 0, 0],
+    [0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0]
 ]
 
-LEVEL14_ARRAY=[
-    [0,0,0,0,0,0,0,0,1,1,1,0,0,0],
-	[0,0,0,1,1,1,0,0,1,1,1,0,0,0],
-	[1,0,0,1,1,1,1,1,1,1,1,1,1,1],
-	[1,0,0,1,1,1,0,0,0,0,0,0,2,1],
-	[1,0,0,0,0,0,0,0,0,0,0,0,1,1],
-	[1,0,0,0,0,0,0,0,0,0,0,0,1,1],
-	[1,0,0,0,0,0,0,0,1,1,1,1,1,1],
-	[1,1,1,1,1,0,0,0,1,1,1,0,0,0],
-	[0,1,1,4,1,0,0,0,1,1,1,0,0,0],
-	[0,0,1,1,1,0,0,0,1,1,1,1,1,2]
+LEVEL14_ARRAY = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+    [0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0],
+    [1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 2, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+    [1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+    [0, 1, 1, 4, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+    [0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 2]
 ]
 
 LEVEL17_ARRAY = [
-    [1,1,1,0,0,0,0,0,0,0,0,0,0,0,0],
-	[1,1,1,1,1,1,1,1,1,0,0,0,1,1,1],
-	[1,1,1,0,0,0,0,0,1,1,1,1,1,4,1],
-	[1,1,1,0,0,0,0,0,0,0,0,0,2,2,1],
-	[1,1,1,0,0,0,0,0,0,0,0,0,0,0,0],
-	[1,1,1,0,0,0,0,0,0,0,0,0,0,0,0],
-	[1,1,1,0,0,0,0,1,1,1,1,1,2,0,0],
-	[1,1,1,1,1,1,1,1,0,0,0,1,1,0,0],
-	[1,-2,1,0,0,0,0,0,0,0,0,1,1,0,0],
-	[1,1,1,0,0,0,0,0,0,0,0,1,2,0,0]
+    [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1],
+    [1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 4, 1],
+    [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 1],
+    [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    [1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 0, 0],
+    [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0],
+    [1, -2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0],
+    [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 0, 0]
 ]
 
 LEVEL19_ARRAY = [
-    [0,1,1,1,1,1,1,1,1,1,-2,1,1,1,1],
-	[0,0,0,0,0,1,1,0,0,0,0,0,0,1,1],
-	[0,0,0,0,0,1,1,0,0,0,0,0,0,1,1],
-	[0,0,0,0,0,0,0,0,0,0,0,0,0,1,1],
-	[0,0,0,0,0,0,0,0,0,0,0,0,0,1,1],
-	[1,1,1,0,0,1,1,0,0,1,-2,1,1,1,1],
-	[1,4,1,0,0,1,1,0,0,0,0,0,0,0,0],
-	[1,1,1,0,0,1,1,0,0,0,0,0,0,0,0],
-	[0,1,1,0,0,1,1,0,0,0,0,0,0,0,0],
-	[0,1,1,1,1,1,1,1,1,1,-2,1,1,1,0]
+    [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, -2, 1, 1, 1, 1],
+    [0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1],
+    [0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+    [1, 1, 1, 0, 0, 1, 1, 0, 0, 1, -2, 1, 1, 1, 1],
+    [1, 4, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+    [1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, -2, 1, 1, 1, 0]
 ]
 
-LEVEL21_ARRAY=[
-    [0,0,0,0,0,0,0,0,1,1,0,0,0,0,0],
-	[0,0,0,0,0,0,0,1,1,1,0,0,0,0,0],
-	[1,1,0,0,1,1,1,1,1,1,0,0,0,0,0],
-	[1,1,1,1,1,1,0,0,1,0,0,0,0,0,0],
-	[1,1,1,1,0,0,0,0,1,0,0,0,1,1,1],
-	[0,1,1,0,0,0,0,0,2,1,1,1,1,4,1],
-	[0,0,1,0,0,0,0,0,2,1,0,0,1,1,1],
-	[0,0,1,1,1,0,0,0,1,1,0,0,0,0,0],
-	[0,0,0,1,1,1,0,0,1,1,0,0,0,0,0],
-	[0,0,0,0,1,1,1,1,1,1,0,0,0,0,0]
+LEVEL21_ARRAY = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0],
+    [1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0],
+    [1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0],
+    [1, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1],
+    [0, 1, 1, 0, 0, 0, 0, 0, 2, 1, 1, 1, 1, 4, 1],
+    [0, 0, 1, 0, 0, 0, 0, 0, 2, 1, 0, 0, 1, 1, 1],
+    [0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0],
+    [0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0]
 ]
 
-LEVEL32_ARRAY=[
-    [0,0,0,0,0,0,0,0,0,0,0,0,1,2],
-	[0,0,1,1,1,1,1,1,0,0,0,1,1,1],
-	[0,1,1,1,0,0,1,1,0,0,1,2,1,1],
-	[0,1,4,1,0,0,0,1,1,1,1,1,0,0],
-	[0,1,1,1,0,0,0,0,1,1,1,0,0,0],
-	[0,0,0,0,0,0,0,0,0,1,1,0,0,0],
-	[0,0,0,0,1,1,1,0,0,1,1,0,0,0],
-	[1,1,0,0,1,2,1,0,0,1,1,0,0,0],
-	[1,1,0,0,1,1,1,1,1,1,1,0,0,0]
+LEVEL32_ARRAY = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2],
+    [0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1],
+    [0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1, 2, 1, 1],
+    [0, 1, 4, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0],
+    [0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0],
+    [0, 0, 0, 0, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0],
+    [1, 1, 0, 0, 1, 2, 1, 0, 0, 1, 1, 0, 0, 0],
+    [1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0]
 ]
+
+
 ########################################################################################################################
 # Function map_copy. (Because python's deepcopy is extremely slow so I implement my own deepcopy)
 ########################################################################################################################
@@ -432,41 +434,49 @@ def bfs(state):
     return path
 
 
-def draw_map(screen, node):
+def draw_map(screen, node, resolution_width, resolution_height):
     # height = len(map)
     # width = len(map[0])
     # for row in map:
     #     for col in row:
     #         if col == 1:
-    #             pygame.draw.rect(screen, WHITE, [30 + 75 * row.index(col), 30 + 75 * map.index(row), 75, 75], 0)
-    #             pygame.draw.rect(screen, BLACK, [30 + 75 * row.index(col), 30 + 75 * map.index(row), 75, 75], 1)
+    #             pygame.draw.rect(screen, WHITE, [30 + rect_size * row.index(col), 30 + rect_size * map.index(row), rect_size, rect_size], 0)
+    #             pygame.draw.rect(screen, BLACK, [30 + rect_size * row.index(col), 30 + rect_size * map.index(row), rect_size, rect_size], 1)
     map = node.map
+    rect_size = 0
+    if resolution_width < resolution_height:
+        rect_size = int(resolution_width / 20)
+    else:
+        rect_size = int(resolution_height / 20)
     for i in range(len(map)):
         for j in range(len(map[i])):
             if (i == node.data[1] and j == node.data[0]) or (i == node.data[3] and j == node.data[2]):
-                pygame.draw.rect(screen, BLUE, [30 + 75 * j, 30 + 75 * i, 75, 75], 0)
-                pygame.draw.rect(screen, BLACK, [30 + 75 * j, 30 + 75 * i, 75, 75], 1)
+                pygame.draw.rect(screen, BLUE, [30 + rect_size * j, 30 + rect_size * i, rect_size, rect_size], 0)
+                pygame.draw.rect(screen, BLACK, [30 + rect_size * j, 30 + rect_size * i, rect_size, rect_size], 1)
             elif map[i][j] == 1:
-                pygame.draw.rect(screen, WHITE, [30 + 75 * j, 30 + 75 * i, 75, 75], 0)
-                pygame.draw.rect(screen, BLACK, [30 + 75 * j, 30 + 75 * i, 75, 75], 1)
+                pygame.draw.rect(screen, WHITE, [30 + rect_size * j, 30 + rect_size * i, rect_size, rect_size], 0)
+                pygame.draw.rect(screen, BLACK, [30 + rect_size * j, 30 + rect_size * i, rect_size, rect_size], 1)
             elif map[i][j] == -2:
-                pygame.draw.rect(screen, WHITE, [30 + 75 * j, 30 + 75 * i, 75, 75], 0)
-                pygame.draw.rect(screen, BLACK, [30 + 75 * j, 30 + 75 * i, 75, 75], 1)
-                pygame.draw.circle(screen, RED, [30 + 75 * j + 37, 30 + 75 * i + 37], 30)
+                pygame.draw.rect(screen, WHITE, [30 + rect_size * j, 30 + rect_size * i, rect_size, rect_size], 0)
+                pygame.draw.rect(screen, BLACK, [30 + rect_size * j, 30 + rect_size * i, rect_size, rect_size], 1)
+                pygame.draw.circle(screen, RED,
+                                   [30 + rect_size * j + int(rect_size / 2), 30 + rect_size * i + int(rect_size / 2)],
+                                   int(rect_size / 2))
             elif map[i][j] == 2:
-                pygame.draw.rect(screen, WHITE, [30 + 75 * j, 30 + 75 * i, 75, 75], 0)
-                pygame.draw.rect(screen, BLACK, [30 + 75 * j, 30 + 75 * i, 75, 75], 1)
-                pygame.draw.aaline(screen, RED, [30 + 75 * j, 30 + 75 * i], [30 + 75 * j + 75, 30 + 75 * i + 75], 1)
-                pygame.draw.aaline(screen, RED, [30 + 75 * j, 30 + 75 * i + 75], [30 + 75 * j + 75, 30 + 75 * i], 1)
+                pygame.draw.rect(screen, WHITE, [30 + rect_size * j, 30 + rect_size * i, rect_size, rect_size], 0)
+                pygame.draw.rect(screen, BLACK, [30 + rect_size * j, 30 + rect_size * i, rect_size, rect_size], 1)
+                pygame.draw.aaline(screen, RED, [30 + rect_size * j, 30 + rect_size * i],
+                                   [30 + rect_size * j + rect_size, 30 + rect_size * i + rect_size], 1)
+                pygame.draw.aaline(screen, RED, [30 + rect_size * j, 30 + rect_size * i + rect_size],
+                                   [30 + rect_size * j + rect_size, 30 + rect_size * i], 1)
             elif map[i][j] == 5:
-                pygame.draw.rect(screen, YELLOW, [30 + 75 * j, 30 + 75 * i, 75, 75], 0)
-                pygame.draw.rect(screen, BLACK, [30 + 75 * j, 30 + 75 * i, 75, 75], 1)
+                pygame.draw.rect(screen, YELLOW, [30 + rect_size * j, 30 + rect_size * i, rect_size, rect_size], 0)
+                pygame.draw.rect(screen, BLACK, [30 + rect_size * j, 30 + rect_size * i, rect_size, rect_size], 1)
 
 
 class Level:
     def __init__(self, state):
         self.state = state
-
 
 
 def init_levels():
@@ -475,7 +485,7 @@ def init_levels():
         levels_array.append(None)
     # LEVEL1 SOLVER:
     state1 = State(Node((1, 1, 1, 1), None, "", LEVEL1_ARRAY), LEVEL1_ARRAY)
-    levels_array[0] = Level( state1)
+    levels_array[0] = Level(state1)
 
     # LEVEL2 SOLVER:
     xo_objects2 = [
@@ -486,15 +496,15 @@ def init_levels():
     state2 = State(
         Node((1, 4, 1, 4), None, "", LEVEL2_ARRAY, {(4, 4): False, (5, 4): False, (10, 4): False, (11, 4): False}),
         LEVEL2_ARRAY, xo_objects2)
-    levels_array[1] = Level( state2)
+    levels_array[1] = Level(state2)
 
     # LEVEL3 SOLVER:
     state3 = State(Node((1, 3, 1, 3), None, "", LEVEL3_ARRAY), LEVEL3_ARRAY)
-    levels_array[2] = Level( state3)
+    levels_array[2] = Level(state3)
 
     # LEVEL4 SOLVER:
     state4 = State(Node((1, 5, 1, 5), None, "", LEVEL4_ARRAY), LEVEL4_ARRAY)
-    levels_array[3] = Level( state4)
+    levels_array[3] = Level(state4)
 
     # Level 5 Solver :
     xo_objects5 = [XOObject(XOObject.TYPE_O, (8, 1),
@@ -508,16 +518,16 @@ def init_levels():
     state5 = State(
         Node((13, 1, 13, 1), None, "", LEVEL5_ARRAY, {(5, 1): True, (6, 1): True, (5, 8): True, (6, 8): True}),
         LEVEL5_ARRAY, xo_objects5)
-    levels_array[4] = Level( state5)
+    levels_array[4] = Level(state5)
 
     # LEVEL6 SOLVER:
     state6 = State(Node((0, 3, 0, 3), None, "", LEVEL6_ARRAY), LEVEL6_ARRAY)
-    levels_array[5] = Level( state6)
+    levels_array[5] = Level(state6)
 
     # LEVEL7 SOLVER
     xo_objects7 = [XOObject(XOObject.TYPE_X, (9, 4), [ManagedPosition(3, 6, ManagedPosition.BOTH)])]
     state7 = State(Node((1, 3, 1, 3), None, "", LEVEL7_ARRAY, {(3, 6): False}), LEVEL7_ARRAY, xo_objects7)
-    levels_array[6] = Level( state7)
+    levels_array[6] = Level(state7)
 
     # LEVEL25 SOLVER
     xo_objects25 = [XOObject(XOObject.TYPE_O, (4, 2),
@@ -532,86 +542,91 @@ def init_levels():
                          {(4, 6): True, (5, 6): True, (7, 3): False, (8, 4): False, (9, 4): False, (13, 2): False,
                           (13, 3): False}),
                     LEVEL25_ARRAY, xo_objects25)
-    levels_array[24] = Level( state25)
+    levels_array[24] = Level(state25)
 
     # Level 11 Solver :
     xo_objects11 = [XOObject(XOObject.TYPE_O, (6, 6),
-                           [ManagedPosition(4, 0, ManagedPosition.ONLY_DISABLE),
-                            ManagedPosition(4, 1, ManagedPosition.ONLY_DISABLE)])]
+                             [ManagedPosition(4, 0, ManagedPosition.ONLY_DISABLE),
+                              ManagedPosition(4, 1, ManagedPosition.ONLY_DISABLE)])]
     state11 = State(Node((0, 5, 0, 5), None, "", LEVEL11_ARRAY, {(4, 0): True, (4, 1): True}),
-                  LEVEL11_ARRAY, xo_objects11)
+                    LEVEL11_ARRAY, xo_objects11)
 
-    levels_array[10] = Level( state11)
+    levels_array[10] = Level(state11)
 
     # Level 12 Solver :
     xo_objects12 = [XOObject(XOObject.TYPE_X, (6, 2),
-                           [ManagedPosition(12, 2, ManagedPosition.BOTH)]),
-                  XOObject(XOObject.TYPE_X, (12, 0), [ManagedPosition(6, 4, ManagedPosition.BOTH)])]
+                             [ManagedPosition(12, 2, ManagedPosition.BOTH)]),
+                    XOObject(XOObject.TYPE_X, (12, 0), [ManagedPosition(6, 4, ManagedPosition.BOTH)])]
     state12 = State(Node((2, 6, 2, 6), None, "", LEVEL12_ARRAY, {(12, 2): False, (6, 4): False}),
-                  LEVEL12_ARRAY, xo_objects12)
+                    LEVEL12_ARRAY, xo_objects12)
 
-    levels_array[11] = Level( state12)
+    levels_array[11] = Level(state12)
 
     # LEVEL13 SOLVER:
     state13 = State(Node((12, 3, 12, 3), None, "", LEVEL13_ARRAY), LEVEL13_ARRAY)
-    levels_array[12] = Level( state13)
+    levels_array[12] = Level(state13)
 
     # LEVEL14 SOLVER:
     xo_objects14 = [XOObject(XOObject.TYPE_X, (12, 3),
-                           [ManagedPosition(1, 2, ManagedPosition.BOTH), ManagedPosition(2, 2, ManagedPosition.BOTH)]),
-                  XOObject(XOObject.TYPE_X, (13, 9),
-                           [ManagedPosition(1, 3, ManagedPosition.BOTH), ManagedPosition(2, 3, ManagedPosition.BOTH)])]
+                             [ManagedPosition(1, 2, ManagedPosition.BOTH),
+                              ManagedPosition(2, 2, ManagedPosition.BOTH)]),
+                    XOObject(XOObject.TYPE_X, (13, 9),
+                             [ManagedPosition(1, 3, ManagedPosition.BOTH),
+                              ManagedPosition(2, 3, ManagedPosition.BOTH)])]
     state14 = State(
         Node((4, 2, 4, 2), None, "", LEVEL14_ARRAY, {(1, 2): False, (2, 2): False, (1, 3): False, (2, 3): False}),
         LEVEL14_ARRAY, xo_objects14)
-    levels_array[13] = Level( state14)
+    levels_array[13] = Level(state14)
 
     # LEVEL17 SOLVER:
     xo_objects17 = [XOObject(XOObject.TYPE_O, (1, 8),
-                           [ManagedPosition(8, 7, ManagedPosition.BOTH)]),
-                  XOObject(XOObject.TYPE_X, (12, 3), [ManagedPosition(6, 6, ManagedPosition.ONLY_DISABLE)]),
-                  XOObject(XOObject.TYPE_X, (13, 3), [ManagedPosition(6, 6, ManagedPosition.ONLY_ENABLE)]),
-                  XOObject(XOObject.TYPE_X, (12, 6), [ManagedPosition(7, 2, ManagedPosition.ONLY_ENABLE)]),
-                  XOObject(XOObject.TYPE_X, (12, 9), [ManagedPosition(8, 7, ManagedPosition.ONLY_DISABLE),
-                                                      ManagedPosition(9, 1, ManagedPosition.ONLY_ENABLE)])]
+                             [ManagedPosition(8, 7, ManagedPosition.BOTH)]),
+                    XOObject(XOObject.TYPE_X, (12, 3), [ManagedPosition(6, 6, ManagedPosition.ONLY_DISABLE)]),
+                    XOObject(XOObject.TYPE_X, (13, 3), [ManagedPosition(6, 6, ManagedPosition.ONLY_ENABLE)]),
+                    XOObject(XOObject.TYPE_X, (12, 6), [ManagedPosition(7, 2, ManagedPosition.ONLY_ENABLE)]),
+                    XOObject(XOObject.TYPE_X, (12, 9), [ManagedPosition(8, 7, ManagedPosition.ONLY_DISABLE),
+                                                        ManagedPosition(9, 1, ManagedPosition.ONLY_ENABLE)])]
     state17 = State(Node((1, 1, 1, 1), None, "", LEVEL17_ARRAY,
-                       {(1, 8): False, (8, 7): False, (6, 6): False, (7, 2): False, (8, 7): False, (9, 1): False}),
-                  LEVEL17_ARRAY, xo_objects17)
-    levels_array[16] = Level( state17)
+                         {(1, 8): False, (8, 7): False, (6, 6): False, (7, 2): False, (8, 7): False, (9, 1): False}),
+                    LEVEL17_ARRAY, xo_objects17)
+    levels_array[16] = Level(state17)
 
     # LEVEL19 SOLVER:
     xo_objects19 = [XOObject(XOObject.TYPE_O, (10, 0),
-                           [ManagedPosition(7, 5, ManagedPosition.BOTH), ManagedPosition(8, 5, ManagedPosition.BOTH)]),
-                  XOObject(XOObject.TYPE_O, (10, 5), [ManagedPosition(9, 2, ManagedPosition.ONLY_DISABLE),
-                                                      ManagedPosition(9, 3, ManagedPosition.ONLY_DISABLE)]),
-                  XOObject(XOObject.TYPE_O, (10, 9), [ManagedPosition(9, 2, ManagedPosition.ONLY_ENABLE),
-                                                      ManagedPosition(9, 3, ManagedPosition.ONLY_ENABLE)])]
+                             [ManagedPosition(7, 5, ManagedPosition.BOTH),
+                              ManagedPosition(8, 5, ManagedPosition.BOTH)]),
+                    XOObject(XOObject.TYPE_O, (10, 5), [ManagedPosition(9, 2, ManagedPosition.ONLY_DISABLE),
+                                                        ManagedPosition(9, 3, ManagedPosition.ONLY_DISABLE)]),
+                    XOObject(XOObject.TYPE_O, (10, 9), [ManagedPosition(9, 2, ManagedPosition.ONLY_ENABLE),
+                                                        ManagedPosition(9, 3, ManagedPosition.ONLY_ENABLE)])]
     state19 = State(
         Node((1, 0, 1, 0), None, "", LEVEL19_ARRAY, {(7, 5): False, (8, 5): False, (9, 2): True, (9, 3): True}),
         LEVEL19_ARRAY, xo_objects19)
-    levels_array[18] = Level( state19)
+    levels_array[18] = Level(state19)
 
     # LEVEL21 SOLVER:
     xo_objects21 = [XOObject(XOObject.TYPE_X, (8, 5),
-                           [ManagedPosition(3, 9, ManagedPosition.BOTH)]),
-                  XOObject(XOObject.TYPE_X, (8, 6), [ManagedPosition(5, 7, ManagedPosition.BOTH)])]
+                             [ManagedPosition(3, 9, ManagedPosition.BOTH)]),
+                    XOObject(XOObject.TYPE_X, (8, 6), [ManagedPosition(5, 7, ManagedPosition.BOTH)])]
     state21 = State(Node((1, 3, 1, 3), None, "", LEVEL21_ARRAY, {(3, 9): False, (5, 7): False}),
-                  LEVEL21_ARRAY, xo_objects21)
+                    LEVEL21_ARRAY, xo_objects21)
     levels_array[20] = Level(state21)
 
     # LEVEL32 SOLVER:
     xo_objects32 = [XOObject(XOObject.TYPE_X, (13, 0),
-                           [ManagedPosition(4, 1, ManagedPosition.BOTH), ManagedPosition(5, 1, ManagedPosition.BOTH),
-                            ManagedPosition(2, 7, ManagedPosition.BOTH), ManagedPosition(3, 7, ManagedPosition.BOTH)]),
-                  XOObject(XOObject.TYPE_X, (11, 2),
-                           [ManagedPosition(2, 8, ManagedPosition.BOTH), ManagedPosition(3, 8, ManagedPosition.BOTH)]),
-                  XOObject(XOObject.TYPE_X, (5, 7),
-                           [ManagedPosition(4, 2, ManagedPosition.BOTH), ManagedPosition(5, 2, ManagedPosition.BOTH)])]
+                             [ManagedPosition(4, 1, ManagedPosition.BOTH), ManagedPosition(5, 1, ManagedPosition.BOTH),
+                              ManagedPosition(2, 7, ManagedPosition.BOTH),
+                              ManagedPosition(3, 7, ManagedPosition.BOTH)]),
+                    XOObject(XOObject.TYPE_X, (11, 2),
+                             [ManagedPosition(2, 8, ManagedPosition.BOTH),
+                              ManagedPosition(3, 8, ManagedPosition.BOTH)]),
+                    XOObject(XOObject.TYPE_X, (5, 7),
+                             [ManagedPosition(4, 2, ManagedPosition.BOTH),
+                              ManagedPosition(5, 2, ManagedPosition.BOTH)])]
     state32 = State(Node((10, 6, 10, 6), None, "", LEVEL32_ARRAY,
-                       {(4, 1): True, (5, 1): True, (2, 7): False, (3, 7): False, (2, 8): False, (3, 8): False,
-                        (4, 2): False, (5, 2): False}), LEVEL32_ARRAY, xo_objects32)
+                         {(4, 1): True, (5, 1): True, (2, 7): False, (3, 7): False, (2, 8): False, (3, 8): False,
+                          (4, 2): False, (5, 2): False}), LEVEL32_ARRAY, xo_objects32)
     levels_array[31] = Level(state32)
-
 
     return levels_array
 
@@ -619,7 +634,7 @@ def init_levels():
 def main():
     levels_array = init_levels()
     level_choice = int(input("Nhap level: "))
-    if levels_array[level_choice-1] is None:
+    if levels_array[level_choice - 1] is None:
         print("Chua lam level nay :v")
         return
 
@@ -627,9 +642,11 @@ def main():
     path = bfs(levels_array[level_choice - 1].state)
     pygame.init()
     pygame.display.set_caption("Bloxorz")
-    height = len(levels_array[level_choice - 1].state.board)
-    width = len(levels_array[level_choice - 1].state.board[0])
-    screen = pygame.display.set_mode((width * 100, height * 100))
+
+    resolution_height = pygame.display.Info().current_h
+    resolution_width = pygame.display.Info().current_w
+
+    screen = pygame.display.set_mode((resolution_width, resolution_height))
     i = 0
     while not done:
         for event in pygame.event.get():  # User did something
@@ -644,7 +661,7 @@ def main():
                         i -= 1
         screen.fill(GREEN)
 
-        draw_map(screen, path[i])
+        draw_map(screen, path[i], resolution_width, resolution_height)
         pygame.display.flip()
 
 
