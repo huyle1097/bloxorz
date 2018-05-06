@@ -807,13 +807,13 @@ def init_levels():
     # LEVEL10 SOLVER
     split_objects10=[SplitObject((12,1),(9,1,12,1))]
     xo_objects10 = [XOObject(XOObject.TYPE_O, (5, 9),
-                             [ManagedPosition(6, 1, ManagedPosition.BOTH), ManagedPosition(7, 1, ManagedPosition.BOTH),
-                              ManagedPosition(12, 2, ManagedPosition.BOTH),
-                              ManagedPosition(13, 2, ManagedPosition.BOTH)]),
-                    XOObject(XOObject.TYPE_X, (11, 9), [ManagedPosition(3, 1, ManagedPosition.BOTH),
-                                                        ManagedPosition(4, 1, ManagedPosition.BOTH)])]
+                             [ManagedPosition(3, 1, ManagedPosition.BOTH), ManagedPosition(4, 1, ManagedPosition.BOTH)]),
+                    XOObject(XOObject.TYPE_X, (11, 9), [ManagedPosition(6, 1, ManagedPosition.BOTH),
+                                                        ManagedPosition(7, 1, ManagedPosition.BOTH),
+                                                        ManagedPosition(12,2, ManagedPosition.BOTH),
+                                                        ManagedPosition(12,3, ManagedPosition.BOTH)])]
     state10 = State(Node((9, 1, 9, 1), None, LEVEL10_ARRAY,
-                    {(6, 1): False, (7, 1): False, (3, 1): False, (4, 1): False, (12, 2): False, (13, 2): False}),LEVEL10_ARRAY,
+                    {(3, 1): False, (4, 1): False, (6,1):False, (7,1):False, (12, 2): False, (12, 3): False}),LEVEL10_ARRAY,
                     xo_objects10,split_objects10)
     levels_array[9] = Level(state10)
 
@@ -1054,6 +1054,7 @@ def init_levels():
     split_objects28 = [SplitObject((11,5),(12,9,14,6))]
     state28 = State(Node((2,2,2,2),None,LEVEL28_ARRAY,{(3,0):False,(4,0):False,(8,9):False,(9,9):False}),LEVEL28_ARRAY,xo_objects28,split_objects28)
     levels_array[27] = Level(state28)
+    
     # LEVEL29 SOLVER:
     xo_objects29 = [XOObject(XOObject.TYPE_O, (2, 0),
                              [ManagedPosition(10, 0, ManagedPosition.ONLY_ENABLE),
