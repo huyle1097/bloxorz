@@ -492,7 +492,7 @@ class State:
                         elif m.type == ManagedPosition.ONLY_DISABLE:
                             node.map[m.y][m.x] = 0
         for split_object in self.split_objects:
-            if self.is_stand() and self.x0 == split_object.position[0] and self.y0 == split_object[1]:
+            if self.is_stand() and self.x0 == split_object.position[0] and self.y0 == split_object.position[1]:
                 self.x0, self.y0, self.x1, self.y1 = split_object.data
 
 
