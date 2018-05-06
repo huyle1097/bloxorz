@@ -1244,6 +1244,7 @@ def test(levels_array, is_dfs):
         print("Level " + str_level + ": " + success + ": " + str(round(end - start, 4)) + "s")
     print("So level success: " + str(i))
     print("Tong so level: " + str(len(list(filter(None.__ne__, levels_array)))))
+    input("Press any key to exit.")
     return
 
 
