@@ -251,10 +251,10 @@ LEVEL27_ARRAY = [
 ]
 
 LEVEL29_ARRAY = [
-    [0, 0, 2, 1, 1, 1, 0, 0, 0, 1, 0, 0, 2, 0, 0],
+    [0, 0, -2, 1, 1, 1, 0, 0, 0, 1, 0, 0, 2, 0, 0],
     [0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0],
-    [-2, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 2],
+    [2, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 2],
     [0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0],
     [0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, -2, 0, 0],
@@ -785,7 +785,7 @@ def init_levels():
                               ManagedPosition(11, 6, ManagedPosition.ONLY_DISABLE)]),
                     XOObject(XOObject.TYPE_X, (12, 0), [
                         ManagedPosition(5, 5, ManagedPosition.ONLY_ENABLE),
-                        ManagedPosition(6, 5, ManagedPosition.ONLY_ENABLE)]),
+                        ManagedPosition(5, 6, ManagedPosition.ONLY_ENABLE)]),
                     XOObject(XOObject.TYPE_X, (0, 3), [ManagedPosition(3, 8, ManagedPosition.ONLY_ENABLE),
                                                        ManagedPosition(4, 8, ManagedPosition.ONLY_ENABLE),
                                                        ManagedPosition(10, 9, ManagedPosition.ONLY_DISABLE),
@@ -797,15 +797,15 @@ def init_levels():
                                                         ManagedPosition(4, 0, ManagedPosition.ONLY_DISABLE),
                                                         ManagedPosition(10, 0, ManagedPosition.ONLY_DISABLE),
                                                         ManagedPosition(11, 0, ManagedPosition.ONLY_DISABLE),
-                                                        ManagedPosition(12, 1, ManagedPosition.ONLY_ENABLE),
-                                                        ManagedPosition(13, 1, ManagedPosition.ONLY_ENABLE),
+                                                        ManagedPosition(12, 3, ManagedPosition.ONLY_ENABLE),
+                                                        ManagedPosition(13, 3, ManagedPosition.ONLY_ENABLE),
                                                         ManagedPosition(10, 6, ManagedPosition.ONLY_DISABLE),
                                                         ManagedPosition(11, 6, ManagedPosition.ONLY_DISABLE)])]
 
     state29 = State(Node((7, 3, 7, 3), None, "", LEVEL29_ARRAY,
                          {(1, 3): False, (2, 3): False, (10, 6): True, (11, 6): True, (10, 9): True, (11, 9): True,
                           (5, 5): False, (5, 6): False, (3, 8): False, (4, 8): False, (10, 0): False, (11, 0): False,
-                          (3, 9): False, (3, 0): True, (4, 0): True, (12, 1): False, (13, 1): False}), LEVEL29_ARRAY,
+                          (3, 9): False, (3, 0): True, (4, 0): True, (12, 3): False, (13, 3): False}), LEVEL29_ARRAY,
                     xo_objects29)
     levels_array[28] = Level(state29)
 
