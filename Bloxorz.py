@@ -329,16 +329,16 @@ def map_copy(map):
 # Created: SonPhan 23/04/2018
 ########################################################################################################################
 class Node:
-    def __init__(self, data=(0, 0, 0, 0), prev_node=None, action="", map=[], xo_objects_states={}):
+    def __init__(self, data=(0, 0, 0, 0), prev_node=None, map=[], xo_objects_states={}, is_splitted=False):
         if not ((data[0] < data[2]) or ((data[0] == data[2]) and data[1] < data[3])):
             temp_data = (data[2], data[3], data[0], data[1])
             self.data = temp_data
         else:
             self.data = data
         self.prev_node = prev_node
-        self.action = action
         self.map = map_copy(map)
         self.xo_objects_states = dict(xo_objects_states)
+        self.is_splitted = is_splitted
 
     def is_stand(self):
         return self.data[0] == self.data[2] and self.data[1] == self.data[3]
@@ -350,7 +350,7 @@ class State:
     DFS = -120
     BFS = 120
 
-    def __init__(self, start, board=LEVEL1_ARRAY, xo_objects=None):
+    def __init__(self, start, board=LEVEL1_ARRAY, xo_objects=None, split_objects=[]):
         if xo_objects is None:
             xo_objects = []
         self.x0, self.y0, self.x1, self.y1 = start.data
@@ -359,6 +359,7 @@ class State:
         self.xo_objects = xo_objects
         self.visited = [start]
         self.start = start
+        self.split_objects = split_objects
 
     # self.all_moves = self.next_position()
 
@@ -367,27 +368,44 @@ class State:
     ####################################################################################################################
     def next_position(self, prev_node):
         rv = []
-        if self.is_stand():
-            self.add_move(rv, (self.x0, self.y0 + 1, self.x1, self.y1 + 2), prev_node, "down")
-            self.add_move(rv, (self.x0, self.y0 - 1, self.x0, self.y0 - 2), prev_node, "up")
-            self.add_move(rv, (self.x0 + 1, self.y0, self.x0 + 2, self.y0), prev_node, "right")
-            self.add_move(rv, (self.x0 - 1, self.y0, self.x0 - 2, self.y1), prev_node, "left")
-        elif self.x0 == self.x1:
-            self.add_move(rv, (self.x0 + 1, self.y0, self.x1 + 1, self.y1), prev_node, "right")
-            self.add_move(rv, (self.x0 - 1, self.y0, self.x1 - 1, self.y1), prev_node, "left")
-            self.add_move(rv, (self.x0, self.y0 - 1, self.x1, self.y1 - 2), prev_node, "up")
-            self.add_move(rv, (self.x0, self.y0 + 2, self.x1, self.y1 + 1), prev_node, "down")
-        elif self.y0 == self.y1:
-            self.add_move(rv, (self.x0, self.y0 + 1, self.x1, self.y1 + 1), prev_node, "down")
-            self.add_move(rv, (self.x0, self.y0 - 1, self.x1, self.y1 - 1), prev_node, "up")
-            self.add_move(rv, (self.x0 - 1, self.y0, self.x1 - 2, self.y1), prev_node, "left")
-            self.add_move(rv, (self.x0 + 2, self.y0, self.x1 + 1, self.y1), prev_node, "right")
+        if not prev_node.is_splitted:
+            if self.is_stand():
+                self.add_move(rv, (self.x0, self.y0 + 1, self.x1, self.y1 + 2), prev_node)
+                self.add_move(rv, (self.x0, self.y0 - 1, self.x0, self.y0 - 2), prev_node)
+                self.add_move(rv, (self.x0 + 1, self.y0, self.x0 + 2, self.y0), prev_node)
+                self.add_move(rv, (self.x0 - 1, self.y0, self.x0 - 2, self.y1), prev_node)
+            elif self.x0 == self.x1:
+                self.add_move(rv, (self.x0 + 1, self.y0, self.x1 + 1, self.y1), prev_node)
+                self.add_move(rv, (self.x0 - 1, self.y0, self.x1 - 1, self.y1), prev_node)
+                self.add_move(rv, (self.x0, self.y0 - 1, self.x1, self.y1 - 2), prev_node)
+                self.add_move(rv, (self.x0, self.y0 + 2, self.x1, self.y1 + 1), prev_node)
+            elif self.y0 == self.y1:
+                self.add_move(rv, (self.x0, self.y0 + 1, self.x1, self.y1 + 1), prev_node)
+                self.add_move(rv, (self.x0, self.y0 - 1, self.x1, self.y1 - 1), prev_node)
+                self.add_move(rv, (self.x0 - 1, self.y0, self.x1 - 2, self.y1), prev_node)
+                self.add_move(rv, (self.x0 + 2, self.y0, self.x1 + 1, self.y1), prev_node)
+            else:
+                return []
         else:
-            return []
+            self.add_move(rv, (self.x0, self.y0 + 1, self.x1, self.y1), prev_node)
+            self.add_move(rv, (self.x0 + 1, self.y0, self.x1, self.y1), prev_node)
+            self.add_move(rv, (self.x0, self.y0 - 1, self.x1, self.y1), prev_node)
+            self.add_move(rv, (self.x0 + 1, self.y0, self.x1, self.y1), prev_node)
+
+            self.add_move(rv, (self.x0, self.y0, self.x1, self.y1), prev_node)
+            self.add_move(rv, (self.x0, self.y0, self.x1 + 1, self.y1), prev_node)
+            self.add_move(rv, (self.x0, self.y0, self.x1, self.y1 - 1), prev_node)
+            self.add_move(rv, (self.x0, self.y0, self.x1 - 1, self.y1), prev_node)
+
         return rv
 
-    def add_move(self, rv, data, prev_node, direction):
+    def add_move(self, rv, data, prev_node):
         xo_objects_states = dict(prev_node.xo_objects_states)
+        is_splitted = prev_node.is_splitted
+        if abs(data[0] - data[2]) < 2 and abs(data[1] - data[3]) < 2:
+            is_splitted = False
+        else:
+            is_splitted = True
         for xo_object in self.xo_objects:
             if (data[0] == xo_object.position[0] and data[1] == xo_object.position[1]) or (
                             data[2] == xo_object.position[0] and data[3] == xo_object.position[1]):
@@ -397,13 +415,11 @@ class State:
                                 3]):
                         if m.type == ManagedPosition.BOTH:
                             xo_objects_states[(m.x, m.y)] = not xo_objects_states[(m.x, m.y)]
-                            rv.append(Node(data, prev_node, direction, prev_node.map, xo_objects_states))
                         elif m.type == ManagedPosition.ONLY_ENABLE:
                             xo_objects_states[(m.x, m.y)] = True
-                            rv.append(Node(data, prev_node, direction, prev_node.map, xo_objects_states))
                         elif m.type == ManagedPosition.ONLY_DISABLE:
                             xo_objects_states[(m.x, m.y)] = False
-        rv.append(Node(data, prev_node, direction, prev_node.map, xo_objects_states))
+        rv.append(Node(data, prev_node, prev_node.map, xo_objects_states, is_splitted))
 
     ####################################################################################################################
     # Function to check if the object repeated previous move (which could lead to infinite loop)
@@ -413,7 +429,7 @@ class State:
         for n in self.visited:
             if n.data[0] == node.data[0] and n.data[1] == node.data[1] and n.data[2] == node.data[2] \
                     and n.data[3] == node.data[3]:
-                if n.xo_objects_states == node.xo_objects_states:
+                if n.xo_objects_states == node.xo_objects_states and n.is_splitted == node.is_splitted:
                     return False
         return True
 
@@ -475,6 +491,9 @@ class State:
                             node.map[m.y][m.x] = 1
                         elif m.type == ManagedPosition.ONLY_DISABLE:
                             node.map[m.y][m.x] = 0
+        for split_object in self.split_objects:
+            if self.is_stand() and self.x0 == split_object.position[0] and self.y0 == split_object[1]:
+                self.x0, self.y0, self.x1, self.y1 = split_object.data
 
 
 class XOObject:
@@ -604,7 +623,7 @@ def init_levels():
     for i in range(33):
         levels_array.append(None)
     # LEVEL1 SOLVER:
-    state1 = State(Node((1, 1, 1, 1), None, "", LEVEL1_ARRAY), LEVEL1_ARRAY)
+    state1 = State(Node((1, 1, 1, 1), None, LEVEL1_ARRAY), LEVEL1_ARRAY)
     levels_array[0] = Level(state1)
 
     # LEVEL2 SOLVER:
@@ -614,16 +633,16 @@ def init_levels():
         XOObject(XOObject.TYPE_X, (8, 1),
                  [ManagedPosition(10, 4, ManagedPosition.BOTH), ManagedPosition(11, 4, ManagedPosition.BOTH)])]
     state2 = State(
-        Node((1, 4, 1, 4), None, "", LEVEL2_ARRAY, {(4, 4): False, (5, 4): False, (10, 4): False, (11, 4): False}),
+        Node((1, 4, 1, 4), None, LEVEL2_ARRAY, {(4, 4): False, (5, 4): False, (10, 4): False, (11, 4): False}),
         LEVEL2_ARRAY, xo_objects2)
     levels_array[1] = Level(state2)
 
     # LEVEL3 SOLVER:
-    state3 = State(Node((1, 3, 1, 3), None, "", LEVEL3_ARRAY), LEVEL3_ARRAY)
+    state3 = State(Node((1, 3, 1, 3), None, LEVEL3_ARRAY), LEVEL3_ARRAY)
     levels_array[2] = Level(state3)
 
     # LEVEL4 SOLVER:
-    state4 = State(Node((1, 5, 1, 5), None, "", LEVEL4_ARRAY), LEVEL4_ARRAY)
+    state4 = State(Node((1, 5, 1, 5), None, LEVEL4_ARRAY), LEVEL4_ARRAY)
     levels_array[3] = Level(state4)
 
     # Level 5 Solver :
@@ -636,17 +655,17 @@ def init_levels():
                    XOObject(XOObject.TYPE_O, (14, 6), [
                        ManagedPosition(5, 8, ManagedPosition.BOTH), ManagedPosition(6, 8, ManagedPosition.BOTH)])]
     state5 = State(
-        Node((13, 1, 13, 1), None, "", LEVEL5_ARRAY, {(5, 1): True, (6, 1): True, (5, 8): True, (6, 8): True}),
+        Node((13, 1, 13, 1), None, LEVEL5_ARRAY, {(5, 1): True, (6, 1): True, (5, 8): True, (6, 8): True}),
         LEVEL5_ARRAY, xo_objects5)
     levels_array[4] = Level(state5)
 
     # LEVEL6 SOLVER:
-    state6 = State(Node((0, 3, 0, 3), None, "", LEVEL6_ARRAY), LEVEL6_ARRAY)
+    state6 = State(Node((0, 3, 0, 3), None, LEVEL6_ARRAY), LEVEL6_ARRAY)
     levels_array[5] = Level(state6)
 
     # LEVEL7 SOLVER
     xo_objects7 = [XOObject(XOObject.TYPE_X, (9, 4), [ManagedPosition(3, 6, ManagedPosition.BOTH)])]
-    state7 = State(Node((1, 3, 1, 3), None, "", LEVEL7_ARRAY, {(3, 6): False}), LEVEL7_ARRAY, xo_objects7)
+    state7 = State(Node((1, 3, 1, 3), None, LEVEL7_ARRAY, {(3, 6): False}), LEVEL7_ARRAY, xo_objects7)
     levels_array[6] = Level(state7)
 
     # LEVEL25 SOLVER
@@ -658,7 +677,7 @@ def init_levels():
                     XOObject(XOObject.TYPE_O, (8, 8), [ManagedPosition(4, 6, ManagedPosition.ONLY_DISABLE),
                                                        ManagedPosition(5, 6, ManagedPosition.ONLY_DISABLE),
                                                        ManagedPosition(7, 3, ManagedPosition.ONLY_ENABLE)])]
-    state25 = State(Node((1, 7, 1, 7), None, "", LEVEL25_ARRAY,
+    state25 = State(Node((1, 7, 1, 7), None, LEVEL25_ARRAY,
                          {(4, 6): True, (5, 6): True, (7, 3): False, (8, 4): False, (9, 4): False, (13, 2): False,
                           (13, 3): False}),
                     LEVEL25_ARRAY, xo_objects25)
@@ -668,7 +687,7 @@ def init_levels():
     xo_objects11 = [XOObject(XOObject.TYPE_O, (6, 6),
                              [ManagedPosition(4, 0, ManagedPosition.ONLY_DISABLE),
                               ManagedPosition(4, 1, ManagedPosition.ONLY_DISABLE)])]
-    state11 = State(Node((0, 5, 0, 5), None, "", LEVEL11_ARRAY, {(4, 0): True, (4, 1): True}),
+    state11 = State(Node((0, 5, 0, 5), None, LEVEL11_ARRAY, {(4, 0): True, (4, 1): True}),
                     LEVEL11_ARRAY, xo_objects11)
 
     levels_array[10] = Level(state11)
@@ -677,13 +696,13 @@ def init_levels():
     xo_objects12 = [XOObject(XOObject.TYPE_X, (6, 2),
                              [ManagedPosition(12, 2, ManagedPosition.BOTH)]),
                     XOObject(XOObject.TYPE_X, (12, 0), [ManagedPosition(6, 4, ManagedPosition.BOTH)])]
-    state12 = State(Node((2, 6, 2, 6), None, "", LEVEL12_ARRAY, {(12, 2): False, (6, 4): False}),
+    state12 = State(Node((2, 6, 2, 6), None, LEVEL12_ARRAY, {(12, 2): False, (6, 4): False}),
                     LEVEL12_ARRAY, xo_objects12)
 
     levels_array[11] = Level(state12)
 
     # LEVEL13 SOLVER:
-    state13 = State(Node((12, 3, 12, 3), None, "", LEVEL13_ARRAY), LEVEL13_ARRAY)
+    state13 = State(Node((12, 3, 12, 3), None, LEVEL13_ARRAY), LEVEL13_ARRAY)
     levels_array[12] = Level(state13)
 
     # LEVEL14 SOLVER:
@@ -694,7 +713,7 @@ def init_levels():
                              [ManagedPosition(1, 3, ManagedPosition.BOTH),
                               ManagedPosition(2, 3, ManagedPosition.BOTH)])]
     state14 = State(
-        Node((4, 2, 4, 2), None, "", LEVEL14_ARRAY, {(1, 2): False, (2, 2): False, (1, 3): False, (2, 3): False}),
+        Node((4, 2, 4, 2), None, LEVEL14_ARRAY, {(1, 2): False, (2, 2): False, (1, 3): False, (2, 3): False}),
         LEVEL14_ARRAY, xo_objects14)
     levels_array[13] = Level(state14)
 
@@ -706,7 +725,7 @@ def init_levels():
                     XOObject(XOObject.TYPE_X, (12, 6), [ManagedPosition(7, 2, ManagedPosition.ONLY_ENABLE)]),
                     XOObject(XOObject.TYPE_X, (12, 9), [ManagedPosition(8, 7, ManagedPosition.ONLY_DISABLE),
                                                         ManagedPosition(9, 1, ManagedPosition.ONLY_ENABLE)])]
-    state17 = State(Node((1, 1, 1, 1), None, "", LEVEL17_ARRAY,
+    state17 = State(Node((1, 1, 1, 1), None, LEVEL17_ARRAY,
                          {(1, 8): False, (8, 7): False, (6, 6): False, (7, 2): False, (8, 7): False, (9, 1): False}),
                     LEVEL17_ARRAY, xo_objects17)
     levels_array[16] = Level(state17)
@@ -728,7 +747,7 @@ def init_levels():
                                                        ManagedPosition(1, 8, ManagedPosition.ONLY_ENABLE),
                                                        ManagedPosition(2, 8, ManagedPosition.ONLY_ENABLE)]),
                     XOObject(XOObject.TYPE_X, (3, 8), [ManagedPosition(5, 4, ManagedPosition.BOTH)])]
-    state18 = State(Node((2, 3, 2, 3), None, "", LEVEL18_ARRAY,
+    state18 = State(Node((2, 3, 2, 3), None, LEVEL18_ARRAY,
                          {(8, 3): False, (9, 3): False, (12, 3): False, (13, 3): False, (1, 8): False, (2, 8): False,
                           (5, 4): False}),
                     LEVEL18_ARRAY, xo_objects18)
@@ -744,7 +763,7 @@ def init_levels():
                     XOObject(XOObject.TYPE_O, (10, 9), [ManagedPosition(9, 2, ManagedPosition.ONLY_ENABLE),
                                                         ManagedPosition(9, 3, ManagedPosition.ONLY_ENABLE)])]
     state19 = State(
-        Node((1, 0, 1, 0), None, "", LEVEL19_ARRAY, {(7, 5): False, (8, 5): False, (9, 2): True, (9, 3): True}),
+        Node((1, 0, 1, 0), None, LEVEL19_ARRAY, {(7, 5): False, (8, 5): False, (9, 2): True, (9, 3): True}),
         LEVEL19_ARRAY, xo_objects19)
     levels_array[18] = Level(state19)
 
@@ -752,7 +771,7 @@ def init_levels():
     xo_objects21 = [XOObject(XOObject.TYPE_X, (8, 5),
                              [ManagedPosition(3, 9, ManagedPosition.BOTH)]),
                     XOObject(XOObject.TYPE_X, (8, 6), [ManagedPosition(5, 7, ManagedPosition.BOTH)])]
-    state21 = State(Node((1, 3, 1, 3), None, "", LEVEL21_ARRAY, {(3, 9): False, (5, 7): False}),
+    state21 = State(Node((1, 3, 1, 3), None, LEVEL21_ARRAY, {(3, 9): False, (5, 7): False}),
                     LEVEL21_ARRAY, xo_objects21)
     levels_array[20] = Level(state21)
 
@@ -763,7 +782,7 @@ def init_levels():
                     XOObject(XOObject.TYPE_O, (4, 3), [ManagedPosition(2, 7, ManagedPosition.ONLY_DISABLE)]),
                     XOObject(XOObject.TYPE_X, (2, 9), [ManagedPosition(12, 3, ManagedPosition.BOTH)]),
                     XOObject(XOObject.TYPE_X, (9, 9), [ManagedPosition(2, 7, ManagedPosition.BOTH)])]
-    state22 = State(Node((1, 3, 1, 3), None, "", LEVEL22_ARRAY, {(2, 7): False, (12, 3): False}),
+    state22 = State(Node((1, 3, 1, 3), None, LEVEL22_ARRAY, {(2, 7): False, (12, 3): False}),
                     LEVEL22_ARRAY, xo_objects22)
     levels_array[21] = Level(state22)
 
@@ -773,7 +792,7 @@ def init_levels():
                               ManagedPosition(9, 9, ManagedPosition.ONLY_DISABLE)]),
                     XOObject(XOObject.TYPE_O, (12, 5), [ManagedPosition(6, 9, ManagedPosition.ONLY_DISABLE)]),
                     XOObject(XOObject.TYPE_O, (13, 5), [ManagedPosition(9, 9, ManagedPosition.ONLY_DISABLE)])]
-    state27 = State(Node((1, 1, 1, 1), None, "", LEVEL27_ARRAY, {(6, 9): True, (9, 9): True}),
+    state27 = State(Node((1, 1, 1, 1), None, LEVEL27_ARRAY, {(6, 9): True, (9, 9): True}),
                     LEVEL27_ARRAY, xo_objects27)
     levels_array[26] = Level(state27)
 
@@ -802,7 +821,7 @@ def init_levels():
                                                         ManagedPosition(10, 6, ManagedPosition.ONLY_DISABLE),
                                                         ManagedPosition(11, 6, ManagedPosition.ONLY_DISABLE)])]
 
-    state29 = State(Node((7, 3, 7, 3), None, "", LEVEL29_ARRAY,
+    state29 = State(Node((7, 3, 7, 3), None, LEVEL29_ARRAY,
                          {(1, 3): False, (2, 3): False, (10, 6): True, (11, 6): True, (10, 9): True, (11, 9): True,
                           (5, 5): False, (5, 6): False, (3, 8): False, (4, 8): False, (10, 0): False, (11, 0): False,
                           (3, 9): False, (3, 0): True, (4, 0): True, (12, 3): False, (13, 3): False}), LEVEL29_ARRAY,
@@ -817,7 +836,7 @@ def init_levels():
                               ManagedPosition(12, 6, ManagedPosition.ONLY_ENABLE)]), XOObject(XOObject.TYPE_X, (1, 5), [
         ManagedPosition(10, 3, ManagedPosition.ONLY_ENABLE), ManagedPosition(11, 3, ManagedPosition.ONLY_ENABLE)]),
                     XOObject(XOObject.TYPE_X, (12, 7), [ManagedPosition(14, 7, ManagedPosition.BOTH)])]
-    state30 = State(Node((2, 4, 2, 4), None, "", LEVEL30_ARRAY,
+    state30 = State(Node((2, 4, 2, 4), None, LEVEL30_ARRAY,
                          {(10, 3): True, (11, 3): True, (9, 6): False, (12, 6): False, (14, 7): False}), LEVEL30_ARRAY,
                     xo_objects30)
     levels_array[29] = Level(state30)
@@ -849,7 +868,7 @@ def init_levels():
                     XOObject(XOObject.TYPE_X, (6, 8),
                              [ManagedPosition(4, 7, ManagedPosition.BOTH),
                               ManagedPosition(5, 7, ManagedPosition.BOTH)])]
-    state31 = State(Node((12, 7, 12, 7), None, "", LEVEL31_ARRAY,
+    state31 = State(Node((12, 7, 12, 7), None, LEVEL31_ARRAY,
                          {(9, 7): True, (10, 7): True, (4, 2): True, (5, 2): True, (9, 2): False, (10, 2): False,
                           (4, 7): False, (5, 7): False, (14, 0): False, (14, 1): False, (14, 2): False}), LEVEL31_ARRAY,
                     xo_objects31)
@@ -866,7 +885,7 @@ def init_levels():
                     XOObject(XOObject.TYPE_X, (5, 7),
                              [ManagedPosition(4, 2, ManagedPosition.BOTH),
                               ManagedPosition(5, 2, ManagedPosition.BOTH)])]
-    state32 = State(Node((10, 6, 10, 6), None, "", LEVEL32_ARRAY,
+    state32 = State(Node((10, 6, 10, 6), None, LEVEL32_ARRAY,
                          {(4, 1): True, (5, 1): True, (2, 7): False, (3, 7): False, (2, 8): False, (3, 8): False,
                           (4, 2): False, (5, 2): False}), LEVEL32_ARRAY, xo_objects32)
     levels_array[31] = Level(state32)
@@ -925,7 +944,7 @@ def init_levels():
                                  ManagedPosition(
                                      11, 1,
                                      ManagedPosition.ONLY_ENABLE)])]
-    state33 = State(Node((1, 3, 1, 3), None, "", LEVEL33_ARRAY,
+    state33 = State(Node((1, 3, 1, 3), None, LEVEL33_ARRAY,
                          {(3, 7): True, (4, 7): True, (11, 1): False}), LEVEL33_ARRAY, xo_objects33)
     levels_array[32] = Level(state33)
 
@@ -955,6 +974,12 @@ def test(levels_array, is_dfs):
     print("So level success: " + str(i))
     print("Tong so level: " + str(len(list(filter(None.__ne__, levels_array)))))
     return
+
+
+class SplitObject:
+    def __init__(self, position, data):
+        self.position = position
+        self.data = data
 
 
 def main():
