@@ -1019,7 +1019,7 @@ def init_levels():
                     XOObject(XOObject.TYPE_X, (5, 2), [ManagedPosition(7, 7, ManagedPosition.ONLY_ENABLE)
                                                         ]),
                     XOObject(XOObject.TYPE_X, (0, 3), [ManagedPosition(3, 1, ManagedPosition.ONLY_ENABLE)]),
-                    XOObject(XOObject.TYPE_X, (7, 5), [ManagedPosition(8, 6, ManagedPosition.ONLY_ENABLE),
+                    XOObject(XOObject.TYPE_X, (5, 7), [ManagedPosition(8, 6, ManagedPosition.ONLY_ENABLE),
                                                        ManagedPosition(9, 6, ManagedPosition.ONLY_ENABLE)])]
     state24 = State(Node((1, 3, 1, 3), None, LEVEL24_ARRAY,
                          { (2, 2): False, (3, 2): False, (7, 7): False,
