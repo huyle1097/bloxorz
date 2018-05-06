@@ -107,6 +107,17 @@ LEVEL7_ARRAY = [
     [0, 1, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0]
 ]
+LEVEL8_ARRAY = [
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+    [1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1],
+    [1, 1, 1, 1, 6, 1, 0, 0, 0, 1, 1, 1, 1, 4, 1],
+    [1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0]
+]
 LEVEL25_ARRAY = [
     [0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
     [0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
@@ -408,11 +419,11 @@ class State:
             is_splitted = True
         for xo_object in self.xo_objects:
             if (data[0] == xo_object.position[0] and data[1] == xo_object.position[1]) or (
-                            data[2] == xo_object.position[0] and data[3] == xo_object.position[1]):
+                    data[2] == xo_object.position[0] and data[3] == xo_object.position[1]):
                 for m in xo_object.managed_position:
                     if (xo_object.type == XOObject.TYPE_O) or (
-                                        xo_object.type == XOObject.TYPE_X and data[0] == data[2] and data[1] == data[
-                                3]):
+                            xo_object.type == XOObject.TYPE_X and data[0] == data[2] and data[1] == data[
+                        3]):
                         if m.type == ManagedPosition.BOTH:
                             xo_objects_states[(m.x, m.y)] = not xo_objects_states[(m.x, m.y)]
                         elif m.type == ManagedPosition.ONLY_ENABLE:
@@ -482,7 +493,7 @@ class State:
         self.x0, self.y0, self.x1, self.y1 = node.data
         for xo_object in self.xo_objects:
             if (self.x0 == xo_object.position[0] and self.y0 == xo_object.position[1]) or (
-                            self.x1 == xo_object.position[0] and self.y1 == xo_object.position[1]):
+                    self.x1 == xo_object.position[0] and self.y1 == xo_object.position[1]):
                 for m in xo_object.managed_position:
                     if xo_object.type == XOObject.TYPE_O or (xo_object.type == XOObject.TYPE_X and self.is_stand()):
                         if m.type == ManagedPosition.BOTH:
@@ -492,7 +503,7 @@ class State:
                         elif m.type == ManagedPosition.ONLY_DISABLE:
                             node.map[m.y][m.x] = 0
         for split_object in self.split_objects:
-            if self.is_stand() and self.x0 == split_object.position[0] and self.y0 == split_object[1]:
+            if self.is_stand() and self.x0 == split_object.position[0] and self.y0 == split_object.position[1]:
                 self.x0, self.y0, self.x1, self.y1 = split_object.data
 
 
@@ -611,6 +622,11 @@ def draw_map(screen, node, resolution_width, resolution_height):
             elif map[i][j] == 5:
                 pygame.draw.rect(screen, YELLOW, [30 + rect_size * j, 30 + rect_size * i, rect_size, rect_size], 0)
                 pygame.draw.rect(screen, BLACK, [30 + rect_size * j, 30 + rect_size * i, rect_size, rect_size], 1)
+            elif map[i][j] == 6:
+                pygame.draw.rect(screen, WHITE, [30 + rect_size * j, 30 + rect_size * i, rect_size, rect_size], 0)
+                pygame.draw.rect(screen, BLACK, [30 + rect_size * j, 30 + rect_size * i, rect_size, rect_size], 1)
+                pygame.draw.aaline(screen, BLACK, [30 + rect_size * j + int(rect_size / 2), 30 + rect_size * i],
+                                   [30 + rect_size * j + int(rect_size / 2), 30 + rect_size * i + rect_size])
 
 
 class Level:
@@ -667,6 +683,11 @@ def init_levels():
     xo_objects7 = [XOObject(XOObject.TYPE_X, (9, 4), [ManagedPosition(3, 6, ManagedPosition.BOTH)])]
     state7 = State(Node((1, 3, 1, 3), None, LEVEL7_ARRAY, {(3, 6): False}), LEVEL7_ARRAY, xo_objects7)
     levels_array[6] = Level(state7)
+
+    # LEVEL 8 SOLVER
+    split_objects = [SplitObject((4, 4), (10, 1, 10, 7))]
+    state8 = State(Node((1, 4, 1, 4), None, LEVEL8_ARRAY), LEVEL8_ARRAY, None, split_objects)
+    levels_array[7] = Level(state8)
 
     # LEVEL25 SOLVER
     xo_objects25 = [XOObject(XOObject.TYPE_O, (4, 2),
@@ -1024,4 +1045,3 @@ def main():
 
 
 main()
-
