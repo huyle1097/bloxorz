@@ -405,7 +405,7 @@ class State:
     ####################################################################################################################
     def next_position(self, prev_node):
         rv = []
-        if not prev_node.is_splitted:
+        if abs(self.x0 - self.x1) < 2 and abs(self.y0 - self.y1) < 2:
             if self.is_stand():
                 self.add_move(rv, (self.x0, self.y0 + 1, self.x1, self.y1 + 2), prev_node)
                 self.add_move(rv, (self.x0, self.y0 - 1, self.x0, self.y0 - 2), prev_node)
@@ -425,13 +425,13 @@ class State:
                 return []
         else:
             self.add_move(rv, (self.x0, self.y0 + 1, self.x1, self.y1), prev_node)
-            self.add_move(rv, (self.x0 + 1, self.y0, self.x1, self.y1), prev_node)
             self.add_move(rv, (self.x0, self.y0 - 1, self.x1, self.y1), prev_node)
             self.add_move(rv, (self.x0 + 1, self.y0, self.x1, self.y1), prev_node)
+            self.add_move(rv, (self.x0 - 1, self.y0, self.x1, self.y1), prev_node)
 
-            self.add_move(rv, (self.x0, self.y0, self.x1, self.y1), prev_node)
-            self.add_move(rv, (self.x0, self.y0, self.x1 + 1, self.y1), prev_node)
+            self.add_move(rv, (self.x0, self.y0, self.x1, self.y1 + 1), prev_node)
             self.add_move(rv, (self.x0, self.y0, self.x1, self.y1 - 1), prev_node)
+            self.add_move(rv, (self.x0, self.y0, self.x1 + 1, self.y1), prev_node)
             self.add_move(rv, (self.x0, self.y0, self.x1 - 1, self.y1), prev_node)
 
         return rv
@@ -466,7 +466,7 @@ class State:
         for n in self.visited:
             if n.data[0] == node.data[0] and n.data[1] == node.data[1] and n.data[2] == node.data[2] \
                     and n.data[3] == node.data[3]:
-                if n.xo_objects_states == node.xo_objects_states and n.is_splitted == node.is_splitted:
+                if n.xo_objects_states == node.xo_objects_states:
                     return False
         return True
 
@@ -531,6 +531,7 @@ class State:
         for split_object in self.split_objects:
             if self.is_stand() and self.x0 == split_object.position[0] and self.y0 == split_object.position[1]:
                 self.x0, self.y0, self.x1, self.y1 = split_object.data
+                node.data = split_object.data
 
 
 class XOObject:
@@ -578,7 +579,7 @@ def bfs(state):
         pointer = pointer.prev_node
     # And print them out
     # for p in path:
-    #     print(p.action)
+    #     print(p.data)
     return path
 
 
