@@ -936,7 +936,7 @@ def test(levels_array, is_dfs):
         data = path[len(path) - 1].data
 
         str_level = str(levels_array.index(level) + 1)
-        success = str(level.state.board[data[1]][data[0]] == 4)
+        success = str(level.state.board[data[1]][data[0]] == 4 and level.state.board[data[3]][data[2]])
         end = time.time()
         print("Level " + str_level + ": " + success + ": " + str(round(end - start, 4)) + "s")
     return
