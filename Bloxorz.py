@@ -247,6 +247,18 @@ LEVEL22_ARRAY = [
     [0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0]
 ]
 
+LEVEL26_ARRAY = [
+    [0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 6],
+    [0, 0, 0, 0, 0, 1, 1, -2, 1, 1, 1, 0, 0, 1],
+    [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1],
+    [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1],
+    [1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0],
+    [1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0],
+    [0, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0],
+    [0, 2, 0, 0, 0, 0, 1, 4, 1, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0]
+]
+
 LEVEL27_ARRAY = [
     [1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1],
     [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1],
@@ -259,6 +271,19 @@ LEVEL27_ARRAY = [
     [0, 0, 0, 0, 0, 5, 5, 5, 5, 5, 5, 5, 1, 1, 1],
     [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0]
 
+]
+
+LEVEL28_ARRAY = [
+    [0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+    [0, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+    [5, 5, 1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+    [5, 5, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0],
+    [5, 5, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0],
+    [5, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 6, 0, 0, 0],
+    [0, 1, 4, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1],
+    [0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, -2, 1, 1, 1],
+    [0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0],
+    [0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0]
 ]
 
 LEVEL29_ARRAY = [
@@ -299,6 +324,7 @@ LEVEL31_ARRAY = [
     [1, 1, 2, 1, 0, 0, 2, 0, 0, 0, 0, 1, 1, 1, 0],
     [1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 ]
+
 LEVEL32_ARRAY = [
     [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2],
     [0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1],
@@ -685,8 +711,8 @@ def init_levels():
     levels_array[6] = Level(state7)
 
     # LEVEL 8 SOLVER
-    split_objects = [SplitObject((4, 4), (10, 1, 10, 7))]
-    state8 = State(Node((1, 4, 1, 4), None, LEVEL8_ARRAY), LEVEL8_ARRAY, None, split_objects)
+    split_objects8 = [SplitObject((4, 4), (10, 1, 10, 7))]
+    state8 = State(Node((1, 4, 1, 4), None, LEVEL8_ARRAY), LEVEL8_ARRAY, None, split_objects8)
     levels_array[7] = Level(state8)
 
     # LEVEL25 SOLVER
@@ -807,6 +833,13 @@ def init_levels():
                     LEVEL22_ARRAY, xo_objects22)
     levels_array[21] = Level(state22)
 
+    # LEVEL26 SOLVER:
+    xo_objects26 = [XOObject(XOObject.TYPE_X, (1,7),[ManagedPosition(3,4,ManagedPosition.ONLY_ENABLE),ManagedPosition(9,7,ManagedPosition.ONLY_ENABLE)]),
+                    XOObject(XOObject.TYPE_O, (7,1), [ManagedPosition(2,3,ManagedPosition.ONLY_DISABLE),ManagedPosition(3,3,ManagedPosition.ONLY_DISABLE)])]
+    split_objects26 = [SplitObject((13,0),(10,5,12,3))]
+    state26 = State(Node((10,5,10,5),None,LEVEL26_ARRAY,{(1,7): False, (7,1):False}),LEVEL26_ARRAY, xo_objects26,split_objects26)
+    levels_array[25] = Level(state26)
+
     # LEVEL27 SOLVER:
     xo_objects27 = [XOObject(XOObject.TYPE_X, (13, 3),
                              [ManagedPosition(6, 9, ManagedPosition.ONLY_DISABLE),
@@ -817,6 +850,15 @@ def init_levels():
                     LEVEL27_ARRAY, xo_objects27)
     levels_array[26] = Level(state27)
 
+    # LEVEL28 SOLVER:
+    xo_objects28 = [XOObject(XOObject.TYPE_O,(11,7),
+                             [ManagedPosition(3,0,ManagedPosition.ONLY_DISABLE),
+                              ManagedPosition(4,0,ManagedPosition.ONLY_DISABLE),
+                              ManagedPosition(8,9,ManagedPosition.ONLY_DISABLE),
+                              ManagedPosition(9,9,ManagedPosition.ONLY_DISABLE)])]
+    split_objects28 = [SplitObject((11,5),(12,9,14,6))]
+    state28 = State(Node((2,2,2,2),None,LEVEL28_ARRAY,{(3,0):False,(4,0):False,(8,9):False,(9,9):False}),LEVEL28_ARRAY,xo_objects28,split_objects28)
+    levels_array[27] = Level(state28)
     # LEVEL29 SOLVER:
     xo_objects29 = [XOObject(XOObject.TYPE_O, (2, 0),
                              [ManagedPosition(10, 0, ManagedPosition.ONLY_ENABLE),
