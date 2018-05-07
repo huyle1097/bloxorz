@@ -246,12 +246,12 @@ LEVEL18_ARRAY = [
     [0, 0, 0, 0, 0, 0, 0, -2, 0, 0, 0, 0, 0, 0, 0],
     [1, 1, -2, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
     [1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0],
-    [1, 10, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1],
+    [1, -2, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 1],
     [1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0],
     [1, 1, -2, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0],
-    [1, 0, 0, 0, 0, 0, 0, 0, -2, 0, 0, 1, 1, 1, 1],
-    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 4, 1],
-    [1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1]
+    [1, 0, 0, 0, 0, 0, 0, 0, -2, 0, 0, 1, 1, 1, 0],
+    [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 4, 1, 0],
+    [1, 0, 0, 2, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0]
 ]
 
 LEVEL19_ARRAY = [
@@ -429,7 +429,7 @@ LEVEL33_ARRAY = [
     [1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, -2, 1, 1, 1],
     [1, 4, 1, 1, 1, 1, -2, 1, 0, 0, 1, 1, 1, -2, 2],
     [1, 1, 1, 0, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1],
-    [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1]
 ]
 
 
@@ -900,9 +900,9 @@ def init_levels():
                              [ManagedPosition(8, 1, ManagedPosition.ONLY_ENABLE),
                               ManagedPosition(9, 1, ManagedPosition.ONLY_ENABLE)])]
     state16 = State(
-        Node((1, 8, 1, 8), None, LEVEL15_ARRAY,
+        Node((3, 6, 3, 6), None, LEVEL16_ARRAY,
              {(3, 1): False, (4, 1): False, (8, 1): False, (9, 1): False}),
-        LEVEL15_ARRAY, xo_objects16, split_objects16)
+        LEVEL16_ARRAY, xo_objects16, split_objects16)
     levels_array[15] = Level(state16)
 
     # LEVEL17 SOLVER:
@@ -946,12 +946,12 @@ def init_levels():
     xo_objects19 = [XOObject(XOObject.TYPE_O, (10, 0),
                              [ManagedPosition(7, 5, ManagedPosition.BOTH),
                               ManagedPosition(8, 5, ManagedPosition.BOTH)]),
-                    XOObject(XOObject.TYPE_O, (10, 5), [ManagedPosition(9, 2, ManagedPosition.ONLY_DISABLE),
-                                                        ManagedPosition(9, 3, ManagedPosition.ONLY_DISABLE)]),
-                    XOObject(XOObject.TYPE_O, (10, 9), [ManagedPosition(9, 2, ManagedPosition.ONLY_ENABLE),
-                                                        ManagedPosition(9, 3, ManagedPosition.ONLY_ENABLE)])]
+                    XOObject(XOObject.TYPE_O, (10, 5), [ManagedPosition(2, 9, ManagedPosition.ONLY_DISABLE),
+                                                        ManagedPosition(3, 9, ManagedPosition.ONLY_DISABLE)]),
+                    XOObject(XOObject.TYPE_O, (10, 9), [ManagedPosition(2, 9, ManagedPosition.ONLY_ENABLE),
+                                                        ManagedPosition(3, 9, ManagedPosition.ONLY_ENABLE)])]
     state19 = State(
-        Node((1, 0, 1, 0), None, LEVEL19_ARRAY, {(7, 5): False, (8, 5): False, (9, 2): True, (9, 3): True}),
+        Node((1, 0, 1, 0), None, LEVEL19_ARRAY, {(7, 5): False, (8, 5): False, (2, 9): True, (3, 9): True}),
         LEVEL19_ARRAY, xo_objects19)
     levels_array[18] = Level(state19)
 
@@ -1011,7 +1011,7 @@ def init_levels():
                     XOObject(XOObject.TYPE_O, (0, 5), [ManagedPosition(9, 2, ManagedPosition.ONLY_DISABLE),
                                                        ManagedPosition(10, 2, ManagedPosition.ONLY_DISABLE),
                                                        ManagedPosition(14, 6, ManagedPosition.ONLY_DISABLE)])]
-    state23 = State(Node((1, 3, 1, 3), None, LEVEL23_ARRAY,
+    state23 = State(Node((4, 7, 4, 7), None, LEVEL23_ARRAY,
                          {(9, 2): True, (10, 2): True, (14, 6): True, (1, 6): False, (2, 6): False, (0, 3): False,
                           (8, 9): False}),
                     LEVEL23_ARRAY, xo_objects23, split_objects23)
@@ -1027,7 +1027,7 @@ def init_levels():
                     XOObject(XOObject.TYPE_X, (0, 3), [ManagedPosition(3, 1, ManagedPosition.ONLY_ENABLE)]),
                     XOObject(XOObject.TYPE_X, (5, 7), [ManagedPosition(8, 6, ManagedPosition.ONLY_ENABLE),
                                                        ManagedPosition(9, 6, ManagedPosition.ONLY_ENABLE)])]
-    state24 = State(Node((1, 3, 1, 3), None, LEVEL24_ARRAY,
+    state24 = State(Node((1, 2, 1, 2), None, LEVEL24_ARRAY,
                          {(2, 2): False, (3, 2): False, (7, 7): False,
                           (3, 1): False, (8, 6): False, (9, 6): False}),
                     LEVEL24_ARRAY, xo_objects24, split_objects24)
@@ -1163,33 +1163,22 @@ def init_levels():
 
     # LEVEL33 SOLVER:
     xo_objects33 = [XOObject(XOObject.TYPE_O, (7, 0),
-                             [ManagedPosition(3, 7, ManagedPosition.ONLY_DISABLE), ManagedPosition(4, 7,
-                                                                                                   ManagedPosition.ONLY_DISABLE)]),
-                    XOObject(
-                        XOObject.TYPE_O, (5, 2), [ManagedPosition(3, 7, ManagedPosition.ONLY_DISABLE),
+                             [ManagedPosition(3, 7, ManagedPosition.ONLY_DISABLE), ManagedPosition(4, 7,ManagedPosition.ONLY_DISABLE)]),
+                    XOObject( XOObject.TYPE_O, (5, 2), [ManagedPosition(3, 7, ManagedPosition.ONLY_DISABLE),
                                                   ManagedPosition(4, 7, ManagedPosition.ONLY_DISABLE)]),
-                    XOObject(XOObject.TYPE_O,
-                             (8, 2), [
-                                 ManagedPosition(3,
-                                                 7,
-                                                 ManagedPosition.ONLY_DISABLE),
-                                 ManagedPosition(4,
-                                                 7,
-                                                 ManagedPosition.ONLY_DISABLE)]), XOObject(
-            XOObject.TYPE_O, (9, 3), [ManagedPosition(3, 7, ManagedPosition.ONLY_DISABLE),
-                                      ManagedPosition(4, 7, ManagedPosition.ONLY_DISABLE)]), XOObject(XOObject.TYPE_O,
-                                                                                                      (13, 3), [
-                                                                                                          ManagedPosition(
-                                                                                                              3,
-                                                                                                              7,
-                                                                                                              ManagedPosition.ONLY_DISABLE),
-                                                                                                          ManagedPosition(
-                                                                                                              4,
-                                                                                                              7,
-                                                                                                              ManagedPosition.ONLY_DISABLE)]),
+                    XOObject(XOObject.TYPE_O,  (8, 2), [ManagedPosition(3,7, ManagedPosition.ONLY_DISABLE),
+                                                        ManagedPosition(4,7,ManagedPosition.ONLY_DISABLE)]),
+                    XOObject(XOObject.TYPE_O, (9, 3), [ManagedPosition(3, 7, ManagedPosition.ONLY_DISABLE),
+                                      ManagedPosition(4, 7, ManagedPosition.ONLY_DISABLE)]),
+                    XOObject(XOObject.TYPE_O, (13, 3), [ManagedPosition( 3, 7,ManagedPosition.ONLY_DISABLE),
+                          ManagedPosition(  4, 7,  ManagedPosition.ONLY_DISABLE)]),
                     XOObject(
                         XOObject.TYPE_O, (7, 4), [ManagedPosition(3, 7, ManagedPosition.ONLY_DISABLE),
                                                   ManagedPosition(4, 7, ManagedPosition.ONLY_DISABLE)]),
+                    XOObject(XOObject.TYPE_O, (10, 3), [ManagedPosition(3, 7, ManagedPosition.ONLY_DISABLE),
+                                              ManagedPosition(4, 7, ManagedPosition.ONLY_DISABLE)]),
+
+
                     XOObject(XOObject.TYPE_O,
                              (10, 4), [
                                  ManagedPosition(3,
@@ -1209,6 +1198,9 @@ def init_levels():
                                                                                                                ManagedPosition.ONLY_DISABLE)]),
                     XOObject(
                         XOObject.TYPE_O, (13, 7), [ManagedPosition(3, 7, ManagedPosition.ONLY_DISABLE),
+                                                   ManagedPosition(4, 7, ManagedPosition.ONLY_DISABLE)]),
+                    XOObject(
+                        XOObject.TYPE_O, (6, 7), [ManagedPosition(3, 7, ManagedPosition.ONLY_DISABLE),
                                                    ManagedPosition(4, 7, ManagedPosition.ONLY_DISABLE)]),
                     XOObject(XOObject.TYPE_X,
                              (14, 7), [
